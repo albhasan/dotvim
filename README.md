@@ -7,5 +7,6 @@ Initialization:
 
 Create symlinks:
 
-    ln -s ~/dotvim/vimrc ~/.vimrc
+    ln -s ~/dotvim/vimrc                  ~/.vimrc
+    ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
 
