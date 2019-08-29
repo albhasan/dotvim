@@ -268,3 +268,30 @@ nmap <C-Down> ddp
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
+
+
+"----
+" Refining search patterns with the command-line window 
+" http://vimcasts.org/episodes/refining-search-patterns-with-the-command-line-window/
+" Replace single quotation marks with the right ones.
+
+
+"----
+" Undo branching and Gundo.vim 
+" http://vimcasts.org/episodes/undo-branching-and-gundo-vim/
+
+
+
+
+
+"---
+" Put these lines at the very end of your vimrc file.
+" https://github.com/dense-analysis/ale#standard-installation
+"
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
+

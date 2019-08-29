@@ -1,3 +1,6 @@
 [submodule "tmux-config"]
 	path = tmux-config
 	url = https://github.com/tony/tmux-config.git
+[submodule "/home/alber/dotvim/pack/git-plugins/start/ale"]
+	path = /home/alber/dotvim/pack/git-plugins/start/ale
+	url = https://github.com/dense-analysis/ale.git
