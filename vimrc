@@ -97,7 +97,7 @@ nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
 
 "---
-"  Working with buffers 
+"  Working with buffers
 " http://vimcasts.org/episodes/working-with-buffers/
 
 " Avoid message when switching among unsaved buffers.
@@ -105,7 +105,7 @@ set hidden
 
 
 "---
-"  Working with windows 
+"  Working with windows
 " http://vimcasts.org/episodes/working-with-windows/
 " Move between windows wihtout having to press Ctrl-w.
 map <C-h> <C-w>h
@@ -115,7 +115,7 @@ map <C-l> <C-w>l
 
 
 "---
-" Working with tabs 
+" Working with tabs
 " http://vimcasts.org/episodes/working-with-tabs/
 " Navigate tabs usind the Ctrl key
 map <C-S-]> gt
@@ -140,20 +140,20 @@ map <C-0> :tablast<CR>
 
 
 "---
-" Creating the Vimcasts logo as ASCII art 
+" Creating the Vimcasts logo as ASCII art
 " http://vimcasts.org/episodes/creating-the-vimcasts-logo-as-ascii-art/
 
 
 "---
-" Using the changelist and jumplist 
+" Using the changelist and jumplist
 " http://vimcasts.org/episodes/using-the-changelist-and-jumplist/
-" The changelist remembers the position of every change that can be undone. 
+" The changelist remembers the position of every change that can be undone.
 " :changes
 " You can move back and forwards through the changelist using the commands:
 " g;
 " g,
 
-" The jumplist remembers each position to which the cursor jumped, 
+" The jumplist remembers each position to which the cursor jumped,
 " :jumps
 " You can move backwards and forwards through the jumplist with the commands:
 " ctrl-O
@@ -161,12 +161,12 @@ map <C-0> :tablast<CR>
 
 
 "---
-" Modal editing: undo, redo and repeat 
+" Modal editing: undo, redo and repeat
 " http://vimcasts.org/episodes/modal-editing-undo-redo-and-repeat/
 
 
 "---
-" The :edit command 
+" The :edit command
 " http://vimcasts.org/episodes/the-edit-command/
 " Open a file relative to the current one
 let mapleader=','
@@ -177,7 +177,7 @@ map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 
 "---
-" Soft wrapping text 
+" Soft wrapping text
 " http://vimcasts.org/episodes/soft-wrapping-text/
 
 " Break lines without breaking words.
@@ -188,10 +188,10 @@ map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 " one liner
 " :set wrap lbr nolist
 
-" :Wrap function 
+" :Wrap function
 command! -nargs=* Wrap set wrap linebreak nolist
 
-" Moving around wrapperd lines using Cmd 
+" Moving around wrapperd lines using Cmd
 vmap <C-j> gj
 vmap <C-k> gk
 vmap <C-4> g$
@@ -206,23 +206,23 @@ nmap <C-0> g^
 
 
 "----
-" Hard wrapping text 
+" Hard wrapping text
 " http://vimcasts.org/episodes/hard-wrapping-text/
 
 
 "----
-" SyntaxHighlighter Vimscript brush and Blackboard theme 
+" SyntaxHighlighter Vimscript brush and Blackboard theme
 " http://vimcasts.org/blog/2010/04/syntaxhighlighter-vimscript-brush-and-blackboard-theme/
 
 "----
-" Formatting text with par 
+" Formatting text with par
 " http://vimcasts.org/episodes/formatting-text-with-par/
 " Format paragraphs in vim using an external program
 " sudo apt install par
 
 
 "----
-" Spell checking 
+" Spell checking
 " http://vimcasts.org/episodes/spell-checking/
 
 " set spell
@@ -239,12 +239,12 @@ set spelllang=en_gb
 
 
 " ----
-" unning Vim within IRB 
+" unning Vim within IRB
 " http://vimcasts.org/episodes/running-vim-within-irb/
 
 
 "---
-" Converting markdown to structured HTML with a macro 
+" Converting markdown to structured HTML with a macro
 " http://vimcasts.org/episodes/converting-markdown-to-structured-html-with-a-macro/
 
 
@@ -271,17 +271,29 @@ vmap <C-Down> xp`[V`]
 
 
 "----
-" Refining search patterns with the command-line window 
+" Refining search patterns with the command-line window
 " http://vimcasts.org/episodes/refining-search-patterns-with-the-command-line-window/
 " Replace single quotation marks with the right ones.
 
 
 "----
-" Undo branching and Gundo.vim 
+" Undo branching and Gundo.vim
 " http://vimcasts.org/episodes/undo-branching-and-gundo-vim/
 
 
-
+"----
+" Habit breaking, habit making 
+" http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
+" Do NOT use the arrow keys!
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+" Move more than one column or row at the time!
+"noremap h <NOP>
+"noremap j <NOP>
+"noremap k <NOP>
+"noremap l <NOP>
 
 
 "---
