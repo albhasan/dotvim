@@ -4,3 +4,6 @@
 [submodule "/home/alber/dotvim/pack/git-plugins/start/ale"]
 	path = /home/alber/dotvim/pack/git-plugins/start/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "/home/alber/dotvim/pack/git-plugins/start/vim-abolish"]
+	path = /home/alber/dotvim/pack/git-plugins/start/vim-abolish
+	url = https://github.com/tpope/vim-abolish.git
