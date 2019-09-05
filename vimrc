@@ -1,5 +1,8 @@
 syntax on
 
+" Treat all numerals as decimal
+set nrformats=
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
