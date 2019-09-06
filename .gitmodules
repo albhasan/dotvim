@@ -7,3 +7,6 @@
 [submodule "/home/alber/dotvim/pack/git-plugins/start/vim-abolish"]
 	path = /home/alber/dotvim/pack/git-plugins/start/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
+[submodule "/home/alber/dotvim/pack/git-plugins/start/vim-commentary"]
+	path = /home/alber/dotvim/pack/git-plugins/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
