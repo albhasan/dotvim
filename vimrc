@@ -6,6 +6,11 @@ set nrformats=
 " Increase the number of history entries.
 set history=200
 
+
+" Avoid the cursor keys when recalling commands from history
+map <C-p> <Up>
+map <C-n> <Down>
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
