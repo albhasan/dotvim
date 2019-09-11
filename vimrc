@@ -3,6 +3,9 @@ syntax on
 " Treat all numerals as decimal
 set nrformats=
 
+" Increase the number of history entries.
+set history=200
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
