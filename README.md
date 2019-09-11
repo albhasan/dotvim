@@ -14,6 +14,11 @@ Create symlinks:
     ln -s /home/alber/dotvim/vimrc                  /home/alber/.vimrc
     ln -s /home/alber/dotvim                        /home/alber/.vim                          
     ln -s /home/alber/dotvim/tmux-config/.tmux.conf /home/alber/.tmux.conf
+    ln -s /home/alber/dotvim/tmux-config            /home/alber/.tmux
+
+Install TMUX commands:
+
+    cd ~/.tmux/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
 
 Resources:
 
