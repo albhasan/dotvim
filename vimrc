@@ -318,3 +318,10 @@ packloadall
 " All messages and errors will be ignored.
 silent! helptags ALL
 
+" create mappings to quickly traverse vim's lists
+" pactical vim page 101
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
