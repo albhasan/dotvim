@@ -1,5 +1,8 @@
 syntax on
 
+" Show the cursor coordinates
+set ruler
+
 " Treat all numerals as decimal
 set nrformats=
 
