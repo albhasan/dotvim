@@ -18,6 +18,10 @@ set history=200
 map <C-p> <Up>
 map <C-n> <Down>
 
+" Use %% to expand 'edit' to the directory of the current buffer.
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
