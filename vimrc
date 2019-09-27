@@ -21,6 +21,10 @@ map <C-n> <Down>
 " Use %% to expand 'edit' to the directory of the current buffer.
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
+" Use the netrw plugin
+set nocompatible
+filetype plugin on
+
 
 "---
 " Show invisibles
