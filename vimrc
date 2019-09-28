@@ -24,6 +24,8 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " Use the netrw plugin
 set nocompatible
 filetype plugin on
+" extent the ability of the % operator to keywords in some languages.
+runtime macros/matchit.vim
 
 
 "---
