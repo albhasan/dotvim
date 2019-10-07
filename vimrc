@@ -2,8 +2,9 @@ syntax on
 
 " Highlight text when it goes beyond 80 characters
 " https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
+" NOTE: It's annoying for editing regular text. Use colorcolumn=80 instead.
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
 
 " Show the cursor coordinates
 set ruler
