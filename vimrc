@@ -29,6 +29,9 @@ filetype plugin on
 runtime macros/matchit.vim
 
 
+" search-next and replace using Q
+nnoremap Q :normal n.<CR>
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
