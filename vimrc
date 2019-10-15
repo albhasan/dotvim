@@ -346,3 +346,13 @@ nnoremap <silent> ]b :bnext<CR>
 nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
+
+"---
+" Filter HTML through PANDOC
+" The gq operation runs the selected text through the filter specified by formatprg
+" http://vimcasts.org/episodes/using-external-filter-commands-to-reformat-html/
+if has("autocmd")
+  let pandoc_pipeline  = "pandoc --from=html --to=markdown"
+  let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
+  autocmd FileType html let &l:formatprg=pandoc_pipeline
+endif
