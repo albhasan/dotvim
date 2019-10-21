@@ -328,16 +328,6 @@ noremap <Right> <NOP>
 "noremap l <NOP>
 
 
-"---
-" Put these lines at the very end of your vimrc file.
-" https://github.com/dense-analysis/ale#standard-installation
-"
-" Load all plugins now.
-" Plugins need to be added to runtimepath before helptags can be generated.
-packloadall
-" Load all of the helptags now, after plugins have been loaded.
-" All messages and errors will be ignored.
-silent! helptags ALL
 
 " create mappings to quickly traverse vim's lists
 " pactical vim page 101
@@ -356,3 +346,15 @@ if has("autocmd")
   let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
   autocmd FileType html let &l:formatprg=pandoc_pipeline
 endif
+
+"---
+" Put these lines at the very end of your vimrc file.
+" https://github.com/dense-analysis/ale#standard-installation
+"
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
+
