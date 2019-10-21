@@ -28,9 +28,14 @@ filetype plugin on
 " extent the ability of the % operator to keywords in some languages.
 runtime macros/matchit.vim
 
-
 " search-next and replace using Q
 nnoremap Q :normal n.<CR>
+
+" Mute highlight
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+" Preview search
+set incsearch
 
 "---
 " Show invisibles
