@@ -1,7 +1,8 @@
-vim configuration files
+# **vim** configuration files
 
-Initialization:
+## Initialization:
 
+```
     git clone https://github.com/albhasan/dotvim.git      ~/dotvim
     mkdir -p ~/dotvim/pack/bundle/start
     mkdir -p ~/dotvim/pack/bundle/opt
@@ -12,28 +13,34 @@ Initialization:
     git clone https://github.com/tpope/vim-fugitive.git   ~/dotvim/pack/bundle/opt/vim-fugitive
     git clone https://github.com/tpope/vim-scriptease.git ~/dotvim/pack/bundle/opt/vim-scriptease
     git clone https://github.com/dense-analysis/ale.git   ~/dotvim/pack/bundle/opt/ale
+```
 
-TMUX commands:
+## TMUX commands:
 
+```
     git clone https://github.com/tony/tmux-config.git     ~/dotvim/tmux-config
-    rm ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load
+    rmdir ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load
     cd ~/dotvim/tmux-config/vendor
     git clone https://github.com/thewtex/tmux-mem-cpu-load.git
     cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+```
 
-Create symlinks:
+## Create symlinks:
 
+```
     ln -s ~/dotvim/vimrc                  ~/.vimrc
     ln -s ~/dotvim                        ~/.vim                          
     ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
     ln -s ~/dotvim/tmux-config            ~/.tmux
+```
 
-Activate vim's optional packages
-:packadd vim-fugitive
-:packadd vim-scripteade
-:packadd ale
+## Activate vim's optional packages
 
-Resources:
+`:packadd vim-fugitive`
+`:packadd vim-scripteade`
+`:packadd ale`
 
-- The Tao of tmux https://leanpub.com/the-tao-of-tmux/
+## Resources:
+
+- The [Tao of tmux](https://leanpub.com/the-tao-of-tmux)
 
