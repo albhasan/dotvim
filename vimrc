@@ -1,5 +1,11 @@
 syntax on
 
+" NOTE: It didn't work
+" package management with minpaci https://github.com/k-takata/minpac
+"packadd minpac
+"call minpac#init()
+
+
 " Highlight text when it goes beyond 80 characters
 " https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
 " NOTE: It's annoying for editing regular text. Use colorcolumn=80 instead.
@@ -358,8 +364,14 @@ endif
 "
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
-packloadall
+"
+"
+"
+"
+"
+"
+"packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
-silent! helptags ALL
+"silent! helptags ALL
 
