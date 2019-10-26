@@ -43,6 +43,14 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 " Preview search
 set incsearch
 
+
+" visual star 
+" in visual mode, use * to search for the current selection instead of the 
+" current word
+" practical vim page 227
+" git clone https://github.com/nelstrom/vim-visual-star-search ~/dotvim/pack/bundle/start/vim-visual-star-search
+
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
@@ -364,12 +372,6 @@ endif
 "
 " Load all plugins now.
 " Plugins need to be added to runtimepath before helptags can be generated.
-"
-"
-"
-"
-"
-"
 "packloadall
 " Load all of the helptags now, after plugins have been loaded.
 " All messages and errors will be ignored.
