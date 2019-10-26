@@ -50,6 +50,13 @@ set incsearch
 " practical vim page 227
 " git clone https://github.com/nelstrom/vim-visual-star-search ~/dotvim/pack/bundle/start/vim-visual-star-search
 
+" fixing the & command
+" practival vim page 241
+" & is the same as :s which repeats the last substitution.
+" no & fires :&& because it preserves flags and it is more consistent
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
 
 "---
 " Show invisibles
