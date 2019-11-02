@@ -58,6 +58,15 @@ nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
 
+" Make the yanked region apparent! - make the yank operation highlight the
+" range of text that it copied
+" http://vimcasts.org/episodes/neovim-eyecandy/
+" Not needed for NEOVIM
+if !exists('##TextYankPost')
+  map y <Plug>(highlightedyank)
+endif
+
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
