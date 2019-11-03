@@ -4,9 +4,6 @@
 
 ```
 
-    mkdir -p ~/dotvim/pack/minpac/opt
-    git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt
-
     git clone https://github.com/albhasan/dotvim.git               ~/dotvim
     mkdir -p ~/dotvim/pack/bundle/start
     mkdir -p ~/dotvim/pack/bundle/opt
