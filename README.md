@@ -2,6 +2,8 @@
 
 ## Initialization:
 
+
+
 ```
 
     git clone https://github.com/albhasan/dotvim.git               ~/dotvim
@@ -17,6 +19,8 @@
     git clone https://github.com/dense-analysis/ale.git            ~/dotvim/pack/bundle/opt/ale
 ```
 
+
+
 ## TMUX commands:
 
 ```
@@ -27,6 +31,8 @@
     cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
 ```
 
+
+
 ## Create symlinks:
 
 ```
@@ -36,11 +42,35 @@
     ln -s ~/dotvim/tmux-config            ~/.tmux
 ```
 
+
+
 ## Activate vim's optional packages
 
 `:packadd vim-fugitive`
 `:packadd vim-scripteade`
 `:packadd ale`
+
+
+
+## Install styles
+
+```
+mkdir -p ~/dotvim/pack/themes/opt
+git clone https://github.com/lifepillar/vim-solarized8.git ~/dotvim/pack/themes/opt/solarized8
+
+```
+
+Activate style using 
+`set background=dark`  
+`colorscheme solarized8`
+
+
+
+## Deactivate Caps Lock by adding the following to .bashrc
+
+`setxkbmap -option ctrl:nocaps`
+
+
 
 ## Resources:
 
