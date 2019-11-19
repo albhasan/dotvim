@@ -67,6 +67,10 @@ if !exists('##TextYankPost')
 endif
 
 
+" highlight the 80 column
+set colorcolumn=80
+
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
