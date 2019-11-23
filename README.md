@@ -1,8 +1,15 @@
 # **vim** configuration files
 
+
+
+## Pre-requisites
+
++ `sudo apt install vim`
++ `sudo apt install ack-grep`
+
+
+
 ## Initialization:
-
-
 
 ```
 
