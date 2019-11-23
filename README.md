@@ -14,6 +14,7 @@
     git clone https://github.com/tpope/vim-surround.git            ~/dotvim/pack/bundle/start/vim-surround
     git clone https://github.com/tpope/vim-unimpaired.git          ~/dotvim/pack/bundle/start/vim-unimpaired
     git clone https://github.com/machakann/vim-highlightedyank.git ~/dotvim/pack/bundle/start/vim-highlightedyank
+    git clone https://github.com/mileszs/ack.vim.git               ~/dotvim/pack/bundle/start/ack.vim
     git clone https://github.com/tpope/vim-fugitive.git            ~/dotvim/pack/bundle/opt/vim-fugitive
     git clone https://github.com/tpope/vim-scriptease.git          ~/dotvim/pack/bundle/opt/vim-scriptease
     git clone https://github.com/dense-analysis/ale.git            ~/dotvim/pack/bundle/opt/ale
@@ -61,8 +62,10 @@ git clone https://github.com/lifepillar/vim-solarized8.git ~/dotvim/pack/themes/
 ```
 
 Activate style using 
-`set background=dark`  
-`colorscheme solarized8`
+```
+:set background=dark  
+:colorscheme solarized8
+```
 
 
 
