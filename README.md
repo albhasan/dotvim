@@ -6,6 +6,7 @@
 
 + `sudo apt install vim`
 + `sudo apt install ack-grep`
++ `sudo apt-get install exuberant-ctags`
 
 
 
@@ -44,10 +45,11 @@
 ## Create symlinks:
 
 ```
-    ln -s ~/dotvim/vimrc                  ~/.vimrc
     ln -s ~/dotvim                        ~/.vim                          
-    ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
+    ln -s ~/dotvim/ctags                  ~/.ctags
+    ln -s ~/dotvim/vimrc                  ~/.vimrc
     ln -s ~/dotvim/tmux-config            ~/.tmux
+    ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
 ```
 
 

@@ -71,6 +71,25 @@ endif
 set colorcolumn=80
 
 
+" use ctags with R
+" Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
+let g:tagbar_type_r = {
+    \ 'ctagstype' : 'r',
+    \ 'kinds'     : [
+        \ 'f:Functions',
+        \ 'g:GlobalVariables',
+        \ 'v:FunctionVariables',
+    \ ]
+\ }
+
+" run ctags each time a file is saved.
+if has("autocmd")                                                               
+  autocmd BufWritePost * call system("ctags -R")
+endif
+
+
+
+
 "---
 " Show invisibles
 " http://vimcasts.org/episodes/show-invisibles/
