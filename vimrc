@@ -1,74 +1,77 @@
-syntax on
 
-" NOTE: It didn't work
-" package management with minpaci https://github.com/k-takata/minpac
-"packadd minpac
-"call minpac#init()
+" NOTES:
+" - Call :set list to show invisible characters.
+" - Call :Stab to set tabstop = softtabstop = shiftwidth
+" - Use F4 to toggle search highlight.
+" - Use F5 to remove white spaces at the end of lines.
+" - Use F7 or ,s to toggle the spelling. Move between suggestion using ]s and ]s and
+"   use z= to see suggestions.
 
 
-" Highlight text when it goes beyond 80 characters
-" https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
-" NOTE: It's annoying for editing regular text. Use colorcolumn=80 instead.
-"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-"match OverLength /\%81v.\+/
-
-" Show the cursor coordinates
-set ruler
-
-" Treat all numerals as decimal
-set nrformats=
-
-" Increase the number of history entries.
-set history=200
-
-" Avoid the cursor keys when recalling commands from history
-map <C-p> <Up>
-map <C-n> <Down>
-
-" Use %% to expand 'edit' to the directory of the current buffer.
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" Use the netrw plugin
 set nocompatible
-filetype plugin on
-" extent the ability of the % operator to keywords in some languages.
-runtime macros/matchit.vim
 
-" search-next and replace using Q
-nnoremap Q :normal n.<CR>
 
-" Mute highlight
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
-
-" Preview search
+set autoindent
+set colorcolumn=80
+set expandtab
+set history=200
 set incsearch
+set listchars=tab:▸\ ,eol:¬
+set nrformats=
+set number
+set ruler
+set shiftwidth=4
+set softtabstop=4
+set spelllang=en_us
+set tabstop=4
+"set hidden " Avoid message when switching among unsaved buffers.
 
 
-" visual star 
-" in visual mode, use * to search for the current selection instead of the 
-" current word
-" practical vim page 227
-" git clone https://github.com/nelstrom/vim-visual-star-search ~/dotvim/pack/bundle/start/vim-visual-star-search
-
-" fixing the & command
-" practival vim page 241
-" & is the same as :s which repeats the last substitution.
-" no & fires :&& because it preserves flags and it is more consistent
-nnoremap & :&&<CR>
-xnoremap & :&&<CR>
+syntax enable
 
 
-" Make the yanked region apparent! - make the yank operation highlight the
-" range of text that it copied
-" http://vimcasts.org/episodes/neovim-eyecandy/
-" Not needed for NEOVIM
-if !exists('##TextYankPost')
-  map y <Plug>(highlightedyank)
+filetype on
+filetype indent on
+filetype plugin on
+
+
+" F keys.
+:noremap          <F4> :set hlsearch! hlsearch?<CR>
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+:noremap          <F7> :set spell! spell?<CR>
+
+
+" Invisible character colors
+highlight NonText guifg=#4a4a59
+highlight SpecialKey guifg=#4a4a59
+
+
+" Remove white spaces at lines' end when saving.
+if has("autocmd")
+    autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
 endif
 
 
-" highlight the 80 column
-set colorcolumn=80
+" Run ctags each time a source file is saved.
+if has("autocmd")
+    autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
+endif
+
+
+" Set specific preferences for certain source files.
+if has("autocmd")
+    " Enable file type detection
+    filetype on
+    " Syntax of these languages is fussy over tabs Vs spaces
+    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    " Customisations based on house-style (arbitrary)
+    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+    " Treat .rss files as XML
+    autocmd BufNewFile,BufRead *.rss setfiletype xml
+endif
 
 
 " use ctags with R
@@ -82,35 +85,14 @@ let g:tagbar_type_r = {
     \ ]
 \ }
 
-" run ctags each time a file is saved.
-if has("autocmd")                                                               
-  autocmd BufWritePost * call system("ctags -R")
+
+" Make the yanked region apparent! - make the yank operation highlight the
+" range of text that it copied (Not needed for NEOVIM)
+" http://vimcasts.org/episodes/neovim-eyecandy/
+if !exists('##TextYankPost')
+    map y <Plug>(highlightedyank)
 endif
 
-
-
-
-"---
-" Show invisibles
-" http://vimcasts.org/episodes/show-invisibles/
-"
-" Shortcut to rapidly toggle `set list`nmap <leader>l :set list!<CR>
-
-" Use the same symbols as TextMate for tabstops and EOLs
-set listchars=tab:▸\ ,eol:¬
-
-" Invisible character colors
-highlight NonText guifg=#4a4a59
-highlight SpecialKey guifg=#4a4a59
-
-
-"----
-" Tabs and Spaces
-" http://vimcasts.org/episodes/tabs-and-spaces/
-
-" Convert tab to white-spaces
-"expandtab
-" tabstop == softtabstop == shiftwidth
 
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
@@ -123,7 +105,7 @@ function! Stab()
   endif
   call SummarizeTabs()
 endfunction
-
+"
 function! SummarizeTabs()
   try
     echohl ModeMsg
@@ -141,32 +123,6 @@ function! SummarizeTabs()
 endfunction
 
 
-"---
-" Whitespace preferences and filetypes
-" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
-" This required vim's autocmd enabled
-if has("autocmd")
-    " Enable file type detection
-    filetype on
-
-    " Syntax of these languages is fussy over tabs Vs spaces
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-    " Customisations based on house-style (arbitrary)
-    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-
-    " Treat .rss files as XML
-    autocmd BufNewFile,BufRead *.rss setfiletype xml
-endif
-
-
-"---
-" Tidying whitespace
-" http://vimcasts.org/episodes/tidying-whitespace/
-
 " Remove white spaces at the end of lines.
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
@@ -180,21 +136,49 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" Map the function to F5
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 
-" Run automatically when a python or javascript file is saved
-autocmd BufWritePre *.py,*.js :call <SID>StripTrailingWhitespaces()
-
-"---
-"  Working with buffers
-" http://vimcasts.org/episodes/working-with-buffers/
-
-" Avoid message when switching among unsaved buffers.
-set hidden
+" Toggle spell checking on and off with `,s`
+let mapleader = ","
+nmap <silent> <leader>s :set spell!<CR>
 
 
-"---
+
+
+
+
+" TODO: Review maps below.
+
+
+
+
+
+
+
+" Avoid the cursor keys when recalling commands from history
+map <C-p> <Up>
+map <C-n> <Down>
+
+" Use %% to expand 'edit' to the directory of the current buffer.
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
+
+" extent the ability of the % operator to keywords in some languages.
+runtime macros/matchit.vim
+
+" search-next and replace using Q
+nnoremap Q :normal n.<CR>
+
+" Mute highlight
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
+
+" fixing the & command
+" practival vim page 241
+" & is the same as :s which repeats the last substitution.
+" no & fires :&& because it preserves flags and it is more consistent
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
+
 "  Working with windows
 " http://vimcasts.org/episodes/working-with-windows/
 " Move between windows wihtout having to press Ctrl-w.
@@ -204,10 +188,10 @@ map <C-k> <C-w>k
 map <C-l> <C-w>l
 
 
-"---
+
 " Working with tabs
 " http://vimcasts.org/episodes/working-with-tabs/
-" Navigate tabs usind the Ctrl key
+    " Navigate tabs usind the Ctrl key
 map <C-S-]> gt
 map <C-S-[> gT
 map <C-1> 1gt
@@ -222,40 +206,6 @@ map <C-9> 9gt
 map <C-0> :tablast<CR>
 
 
-"---
-" How to use tabs
-" http://vimcasts.org/episodes/how-to-use-tabs/
-" Each tab has its own directory, hence, each tab can hande a project.
-" Use vimgrep to find a text in a project.
-
-
-"---
-" Creating the Vimcasts logo as ASCII art
-" http://vimcasts.org/episodes/creating-the-vimcasts-logo-as-ascii-art/
-
-
-"---
-" Using the changelist and jumplist
-" http://vimcasts.org/episodes/using-the-changelist-and-jumplist/
-" The changelist remembers the position of every change that can be undone.
-" :changes
-" You can move back and forwards through the changelist using the commands:
-" g;
-" g,
-
-" The jumplist remembers each position to which the cursor jumped,
-" :jumps
-" You can move backwards and forwards through the jumplist with the commands:
-" ctrl-O
-" ctrl-I
-
-
-"---
-" Modal editing: undo, redo and repeat
-" http://vimcasts.org/episodes/modal-editing-undo-redo-and-repeat/
-
-
-"---
 " The :edit command
 " http://vimcasts.org/episodes/the-edit-command/
 " Open a file relative to the current one
@@ -266,21 +216,20 @@ map <leader>ev :vsp <C-R>=expand("%:p:h") . "/" <CR>
 map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 
-"---
 " Soft wrapping text
 " http://vimcasts.org/episodes/soft-wrapping-text/
-
+"
 " Break lines without breaking words.
 " :set wrap
 " :set linebreak
 " :set nolist
-
+"
 " one liner
 " :set wrap lbr nolist
-
+"
 " :Wrap function
 command! -nargs=* Wrap set wrap linebreak nolist
-
+"
 " Moving around wrapperd lines using Cmd
 vmap <C-j> gj
 vmap <C-k> gk
@@ -294,62 +243,6 @@ nmap <C-6> g^
 nmap <C-0> g^
 
 
-
-"----
-" Hard wrapping text
-" http://vimcasts.org/episodes/hard-wrapping-text/
-
-
-"----
-" SyntaxHighlighter Vimscript brush and Blackboard theme
-" http://vimcasts.org/blog/2010/04/syntaxhighlighter-vimscript-brush-and-blackboard-theme/
-
-"----
-" Formatting text with par
-" http://vimcasts.org/episodes/formatting-text-with-par/
-" Format paragraphs in vim using an external program
-" sudo apt install par
-
-
-"----
-" Spell checking
-" http://vimcasts.org/episodes/spell-checking/
-
-" set spell
-" set spelllang=en_gb
-" move to the next misspelled word using ]s and back [s
-" once over a misspelled word, use z= to see a list of suggestions
-
-" Toggle spell checking on and off with `,s`
-let mapleader = ","
-nmap <silent> <leader>s :set spell!<CR>
-
-" Set region to British English
-set spelllang=en_gb
-
-
-" ----
-" unning Vim within IRB
-" http://vimcasts.org/episodes/running-vim-within-irb/
-
-
-"---
-" Converting markdown to structured HTML with a macro
-" http://vimcasts.org/episodes/converting-markdown-to-structured-html-with-a-macro/
-
-
-"----
-" Selecting columns with visual block mode
-" http://vimcasts.org/episodes/selecting-columns-with-visual-block-mode/
-
-"----
-" Press F4 to toggle highlighting on/off, and show current value.
-" https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches
-:noremap <F4> :set hlsearch! hlsearch?<CR>
-
-
-
-"----
 " Bubble single lines
 " http://vimcasts.org/episodes/bubbling-text/
 nmap <C-Up> ddkP
@@ -359,20 +252,7 @@ vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
 
-
-"----
-" Refining search patterns with the command-line window
-" http://vimcasts.org/episodes/refining-search-patterns-with-the-command-line-window/
-" Replace single quotation marks with the right ones.
-
-
-"----
-" Undo branching and Gundo.vim
-" http://vimcasts.org/episodes/undo-branching-and-gundo-vim/
-
-
-"----
-" Habit breaking, habit making 
+" Habit breaking, habit making
 " http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
 " Do NOT use the arrow keys!
 noremap <Up> <NOP>
@@ -386,7 +266,6 @@ noremap <Right> <NOP>
 "noremap l <NOP>
 
 
-
 " create mappings to quickly traverse vim's lists
 " pactical vim page 101
 nnoremap <silent> [b :bprevious<CR>
@@ -395,7 +274,6 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
 
-"---
 " Filter HTML through PANDOC
 " The gq operation runs the selected text through the filter specified by formatprg
 " http://vimcasts.org/episodes/using-external-filter-commands-to-reformat-html/
@@ -404,6 +282,136 @@ if has("autocmd")
   let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
   autocmd FileType html let &l:formatprg=pandoc_pipeline
 endif
+
+
+" How to use tabs
+" http://vimcasts.org/episodes/how-to-use-tabs/
+" Each tab has its own directory, hence, each tab can hande a project.
+" Use vimgrep to find a text in a project.
+
+
+" Creating the Vimcasts logo as ASCII art
+" http://vimcasts.org/episodes/creating-the-vimcasts-logo-as-ascii-art/
+
+
+" Using the changelist and jumplist
+" http://vimcasts.org/episodes/using-the-changelist-and-jumplist/
+" The changelist remembers the position of every change that can be undone.
+" :changes
+" You can move back and forwards through the changelist using the commands:
+" g;
+" g,
+"
+" The jumplist remembers each position to which the cursor jumped,
+" :jumps
+" You can move backwards and forwards through the jumplist with the commands:
+" ctrl-O
+" ctrl-I
+
+
+" Modal editing: undo, redo and repeat
+" http://vimcasts.org/episodes/modal-editing-undo-redo-and-repeat/
+
+
+" Hard wrapping text
+" http://vimcasts.org/episodes/hard-wrapping-text/
+
+
+" SyntaxHighlighter Vimscript brush and Blackboard theme
+" http://vimcasts.org/blog/2010/04/syntaxhighlighter-vimscript-brush-and-blackboard-theme/
+
+
+" Formatting text with par
+" http://vimcasts.org/episodes/formatting-text-with-par/
+" Format paragraphs in vim using an external program
+" sudo apt install par
+
+
+" Show invisibles
+" http://vimcasts.org/episodes/show-invisibles/
+
+
+" Tabs and Spaces
+" http://vimcasts.org/episodes/tabs-and-spaces/
+
+" Spell checking
+" http://vimcasts.org/episodes/spell-checking/
+"
+" set spell
+" set spelllang=en_gb
+" move to the next misspelled word using ]s and back [s
+" once over a misspelled word, use z= to see a list of suggestions
+
+
+" Whitespace preferences and filetypes
+" http://vimcasts.org/episodes/whitespace-preferences-and-filetypes/
+
+
+" Tidying whitespace
+" http://vimcasts.org/episodes/tidying-whitespace/
+
+
+" Working with buffers
+" http://vimcasts.org/episodes/working-with-buffers/
+
+
+" unning Vim within IRB
+" http://vimcasts.org/episodes/running-vim-within-irb/
+
+
+" Converting markdown to structured HTML with a macro
+" http://vimcasts.org/episodes/converting-markdown-to-structured-html-with-a-macro/
+
+
+" Selecting columns with visual block mode
+" http://vimcasts.org/episodes/selecting-columns-with-visual-block-mode/
+
+
+" Press F4 to toggle highlighting on/off, and show current value.
+" https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches
+
+
+" Refining search patterns with the command-line window
+" http://vimcasts.org/episodes/refining-search-patterns-with-the-command-line-window/
+" Replace single quotation marks with the right ones.
+
+
+" Undo branching and Gundo.vim
+" http://vimcasts.org/episodes/undo-branching-and-gundo-vim/
+
+
+" visual star
+" in visual mode, use * to search for the current selection instead of the
+" current word
+" practical vim page 227
+" git clone https://github.com/nelstrom/vim-visual-star-search ~/dotvim/pack/bundle/start/vim-visual-star-search
+
+
+" Set up netrd to look like NERDtree
+" https://shapeshed.com/vim-netrw/#nerdtree-like-setup
+"let g:netrw_banner = 0
+"let g:netrw_liststyle = 3
+"let g:netrw_browse_split = 4
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
+"augroup ProjectDrawer
+"  autocmd!
+"  autocmd VimEnter * :Vexplore
+"augroup END
+
+
+" NOTE: It didn't work
+" package management with minpaci https://github.com/k-takata/minpac
+"packadd minpac
+"call minpac#init()
+
+
+" NOTE: It's annoying for editing regular text. Use colorcolumn=80 instead.
+" Highlight text when it goes beyond 80 characters
+" https://stackoverflow.com/questions/235439/vim-80-column-layout-concerns
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
+
 
 "---
 " Put these lines at the very end of your vimrc file.
