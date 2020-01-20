@@ -27,8 +27,7 @@ set tabstop=4
 "set hidden " Avoid message when switching among unsaved buffers.
 
 "TODO: review and finish watching the video.
-"How to Do 90% of What Plugins Do (With Just Vim)
-https://youtu.be/XA2WjJbmmoM
+"How to Do 90% of What Plugins Do (With Just Vim) https://youtu.be/XA2WjJbmmoM
 set path+=** " search down into subfolders using :find
 set wildmenu " display all matching files when we tab complete
 "-------
