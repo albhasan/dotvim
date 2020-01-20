@@ -18,13 +18,22 @@ set history=200
 set incsearch
 set listchars=tab:▸\ ,eol:¬
 set nrformats=
-set number
+"set number
 set ruler
 set shiftwidth=4
 set softtabstop=4
 set spelllang=en_us
 set tabstop=4
 "set hidden " Avoid message when switching among unsaved buffers.
+
+"TODO: review and finish watching the video.
+"How to Do 90% of What Plugins Do (With Just Vim)
+https://youtu.be/XA2WjJbmmoM
+set path+=** " search down into subfolders using :find
+set wildmenu " display all matching files when we tab complete
+"-------
+
+
 
 
 syntax enable
