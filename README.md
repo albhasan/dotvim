@@ -49,9 +49,13 @@ cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load && cmake . && make && sudo make
 ```
 ln -s ~/dotvim                        ~/.vim                          
 ln -s ~/dotvim/ctags                  ~/.ctags
-ln -s ~/dotvim/vimrc                  ~/.vimrc
 ln -s ~/dotvim/tmux-config            ~/.tmux
 ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
+# neovim
+mkdir -p ~/.config/nvim
+echo "set runtimepath^=~/.vim/ runtimepath+=~/.vim/after" >  ~/.config/nvim/init.vim
+echo "let &packpath = &runtimepath"                       >> ~/.config/nvim/init.vim
+echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init.vim
 ```
 
 
