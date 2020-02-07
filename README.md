@@ -18,6 +18,8 @@
 ### vim's plugins:
 
 ```
+cd ~
+git clone https://github.com/albhasan/dotvim.git
 mkdir -p ~/dotvim/pack/minpac/opt
 git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt
 # Don't forget to update the plugins! Run from inside vim :call minpac#update()
