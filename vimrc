@@ -4,9 +4,9 @@
 " - Call :Stab to set tabstop = softtabstop = shiftwidth
 " - Use F4 to toggle search highlight.
 " - Use F5 to remove white spaces at the end of lines.
-" - Use F7 or ,s to toggle the spelling. Move between suggestion using ]s and ]s and
-"   use z= to see suggestions.
-
+" - Use F7 or ,s to toggle the spelling. Move between suggestion using ]s and ]s
+" - use z= to see suggestions.
+" - update the plugins calling :call minpac#update() 
 
 set nocompatible
 
@@ -159,8 +159,21 @@ let mapleader = ","
 nmap <silent> <leader>s :set spell!<CR>
 
 
-
-
+" Configure minpac
+packadd minpac
+call minpac#init()
+call minpac#add("machakann/vim-highlightedyank")
+call minpac#add("mileszs/ack.vim")
+call minpac#add("nelstrom/vim-visual-star-search")
+call minpac#add("tpope/vim-abolish")
+call minpac#add("tpope/vim-commentary")
+call minpac#add("tpope/vim-surround")
+call minpac#add("tpope/vim-unimpaired")
+"
+call minpac#add("dense-analysis/ale", {'type': 'opt'})
+call minpac#add("vim/killersheep", {'type': 'opt'})
+call minpac#add("tpope/vim-fugitive", {'type': 'opt'})
+call minpac#add("tpope/vim-scriptease", {'type': 'opt'})
 
 
 " TODO: Review maps below.

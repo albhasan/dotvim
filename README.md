@@ -5,34 +5,26 @@
 ## Pre-requisites
 
 + `sudo apt install vim`
++ `#sudo apt install neovim`
 + `sudo apt install ack-grep`
++ `sudo apt install git`
 + `sudo apt-get install exuberant-ctags`
 
 
 
 ## Initialization:
 
+
+### vim's plugins:
+
 ```
-git clone https://github.com/albhasan/dotvim.git               ~/dotvim
-mkdir -p ~/dotvim/pack/bundle/opt
-mkdir -p ~/dotvim/pack/bundle/start
-mkdir -p ~/dotvim/pack/themes/opt
-git clone https://github.com/dense-analysis/ale.git            ~/dotvim/pack/bundle/opt/ale
-git clone https://github.com/lifepillar/vim-solarized8.git     ~/dotvim/pack/themes/opt/solarized8
-git clone https://github.com/tpope/vim-fugitive.git            ~/dotvim/pack/bundle/opt/vim-fugitive
-git clone https://github.com/tpope/vim-scriptease.git          ~/dotvim/pack/bundle/opt/vim-scriptease
-git clone https://github.com/mileszs/ack.vim.git               ~/dotvim/pack/bundle/start/ack.vim
-git clone https://github.com/tpope/vim-abolish.git             ~/dotvim/pack/bundle/start/vim-abolish
-git clone https://github.com/tpope/vim-commentary.git          ~/dotvim/pack/bundle/start/vim-commentary
-git clone https://github.com/machakann/vim-highlightedyank.git ~/dotvim/pack/bundle/start/vim-highlightedyank
-git clone https://github.com/tpope/vim-surround.git            ~/dotvim/pack/bundle/start/vim-surround
-git clone https://github.com/tpope/vim-unimpaired.git          ~/dotvim/pack/bundle/start/vim-unimpaired
-git clone https://github.com/nelstrom/vim-visual-star-search   ~/dotvim/pack/bundle/start/vim-visual-star-search
+mkdir -p ~/dotvim/pack/minpac/opt
+git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt
+# Don't forget to update the plugins! Run from inside vim :call minpac#update()
 ```
 
 
-
-## TMUX commands:
+### TMUX:
 
 ```
 git clone https://github.com/tony/tmux-config.git     ~/dotvim/tmux-config
@@ -43,8 +35,7 @@ cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load && cmake . && make && sudo make
 ```
 
 
-
-## Create symlinks:
+### Create symlinks:
 
 ```
 ln -s ~/dotvim                        ~/.vim                          
@@ -59,26 +50,36 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 ```
 
 
+### Install or update plugins from inside vim:
 
-## Activate vim's optional packages
+`:call minpac#update()`
+
+
+
+### Activate vim's optional packages
 
 `:packadd vim-fugitive`
 `:packadd vim-scripteade`
 `:packadd ale`
 
 
-Activate style using 
-```
-:set background=dark  
-:colorscheme solarized8
-```
-
-
-
-## Deactivate Caps Lock by adding the following to .bashrc
+### Deactivate Caps Lock by adding the following to `.bashrc`
 
 `setxkbmap -option ctrl:nocaps`
 
+
+
+## Usage notes:
+
++ Change background using `:set background=dark`
++ Cange colors using `:colorscheme solarized8`
++ Show invisible characters `:set list`
++ Set the tab configuration `:Stab`
++ Toggle search highlight using F4
++ Remove white spaces at the end of lines using F5.
++ Use F7 or ,s to toggle the spelling using F7 and to move between suggestion using `]s`
++ To see suggestions use `z=`
++ Update the plugins using `:call minpac#update()`
 
 
 ## Resources:
