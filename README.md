@@ -19,17 +19,19 @@ sudo apt-get install exuberant-ctags
 ### Install linters:
 
 ```
-pip3 install flake8                    # python
-pip3 install vim-vint                  # vim script
-R -e "install.packages('styler')"      # R
-sudo apt-get install shellcheck        # bash
-sudo apt-get install chktex            # latex
-sudo apt-get install python3-proselint # latex, html, markdown
-sudo apt-get install libxml2-utils     # xml
-sudo npm install -g eslint             # javascript
-sudo npm install -g write-good         # text, html, markdown
-sudo npm install -g prettier           # yaml
-sudo npm install -g jsonlint           # json
+pip3 install flake8                                # python
+pip3 install vim-vint                              # vim script
+R -e "install.packages('styler')"                  # R
+R -e "devtools::install_github('jimhester/lintr')" # R
+devtools::install_github("jimhester/lintr")
+sudo apt-get install shellcheck                    # bash
+sudo apt-get install chktex                        # latex
+sudo apt-get install python3-proselint             # latex, html, markdown
+sudo apt-get install libxml2-utils                 # xml
+sudo npm install -g eslint                         # javascript
+sudo npm install -g write-good                     # text, html, markdown
+sudo npm install -g prettier                       # yaml
+sudo npm install -g jsonlint                       # json
 ```
 
 
@@ -127,4 +129,6 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 ## TODO:
 
 + Move color schemas to the right place in the directory tree.
-+ Prettier lint is not working. ALE has no vim files regarding its configuration.
++ Prettier lint is not working. ALE has no vim files about its configuration.
++ styler is not working.
+

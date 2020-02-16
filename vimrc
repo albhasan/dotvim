@@ -55,7 +55,7 @@ let g:netrw_liststyle=3     " tree view
 "let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 
-if has("autocmd")
+if has('autocmd')
     "
     " Syntax of these languages is fussy over tabs Vs spaces
     autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
@@ -128,8 +128,8 @@ endfunction
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
-    let l = line(".")
-    let c = col(".")
+    let l = line('.')
+    let c = col('.')
     " Do the business:
     %s/\s\+$//e
     " Clean up: restore previous search history, and cursor position
@@ -141,18 +141,18 @@ endfunction
 " Configure minpac
 packadd minpac
 call minpac#init()
-call minpac#add("dense-analysis/ale")
-call minpac#add("machakann/vim-highlightedyank")
-call minpac#add("mileszs/ack.vim")
-call minpac#add("nelstrom/vim-visual-star-search")
-call minpac#add("tpope/vim-abolish")
-call minpac#add("tpope/vim-commentary")
-call minpac#add("tpope/vim-surround")
-call minpac#add("tpope/vim-unimpaired")
+call minpac#add('dense-analysis/ale')
+call minpac#add('machakann/vim-highlightedyank')
+call minpac#add('mileszs/ack.vim')
+call minpac#add('nelstrom/vim-visual-star-search')
+call minpac#add('tpope/vim-abolish')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-unimpaired')
 " Optional packages.
-call minpac#add("vim/killersheep", {'type': 'opt'})
-call minpac#add("tpope/vim-fugitive", {'type': 'opt'})
-call minpac#add("tpope/vim-scriptease", {'type': 'opt'})
+call minpac#add('vim/killersheep', {'type': 'opt'})
+call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
+call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 
 
 " Map F keys.
@@ -181,7 +181,7 @@ let g:ale_linters = {
             \   'json': ['prettier', 'jsonlint'],
             \   'markdown':  ['proselint', 'write-good'],
             \   'python': ['flake8'],
-            \   'R': ['styler'],
+            \   'r': ['styler', 'lintr'],
             \   'sh': ['shellcheck'],
             \   'tex':  ['chktex', 'proselint', 'write-good'],
             \   'text': ['chktex', 'proselint', 'write-good'],
@@ -325,9 +325,9 @@ nnoremap <silent> ]B :blast<CR>
 " Filter HTML through PANDOC
 " The gq operation runs the selected text through the filter specified by formatprg
 " http://vimcasts.org/episodes/using-external-filter-commands-to-reformat-html/
-if has("autocmd")
-  let pandoc_pipeline  = "pandoc --from=html --to=markdown"
-  let pandoc_pipeline .= " | pandoc --from=markdown --to=html"
+if has('autocmd')
+  let pandoc_pipeline  = 'pandoc --from=html --to=markdown'
+  let pandoc_pipeline .= ' | pandoc --from=markdown --to=html'
   autocmd FileType html let &l:formatprg=pandoc_pipeline
 endif
 
