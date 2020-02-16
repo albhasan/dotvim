@@ -4,18 +4,44 @@
 
 ## Pre-requisites
 
-+ `sudo apt install vim`
-+ `#sudo apt install neovim`
-+ `sudo apt install ack-grep`
-+ `sudo apt install git`
-+ `sudo apt-get install exuberant-ctags`
+
+### Install software:
+
+```
+sudo apt install vim
+#sudo apt install neovim
+sudo apt install ack-grep
+sudo apt install git
+sudo apt-get install exuberant-ctags
+```
 
 
+### Install linters:
 
-## Initialization:
+```
+pip3 install flake8               # python
+npm install eslint                # javascript
+R -e "install.packages('styler')" # R
+```
 
 
-### vim's plugins:
+### Configure ctags to work with R:
+
+```
+/bin/cat <<EOM > ~/.ctags
+--langdef=R
+--langmap=r:.R.r
+--regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t]function/\1/f,Functions/
+--regex-R=/^"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/g,GlobalVars/
+--regex-R=/[ \t]"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*(<-|=)[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/v,FunctionVariables/
+EOM
+```
+
+
+## Initialization
+
+
+### Get vim configuration:
 
 ```
 cd ~
@@ -26,7 +52,7 @@ git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt/minpac
 ```
 
 
-### TMUX:
+### Get TMUX configuration:
 
 ```
 git clone https://github.com/tony/tmux-config.git     ~/dotvim/tmux-config
@@ -41,7 +67,6 @@ cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load && cmake . && make && sudo make
 
 ```
 ln -s ~/dotvim                        ~/.vim                          
-ln -s ~/dotvim/ctags                  ~/.ctags
 ln -s ~/dotvim/tmux-config            ~/.tmux
 ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
 # neovim
@@ -57,12 +82,10 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 `:call minpac#update()`
 
 
-
-### Activate vim's optional packages
+### Activate vim's optional packages (from inside vim):
 
 `:packadd vim-fugitive`
-`:packadd vim-scripteade`
-`:packadd ale`
+`:packadd vim-scriptease`
 
 
 ### Deactivate Caps Lock by adding the following to `.bashrc`
@@ -79,18 +102,21 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Set the tab configuration `:Stab`
 + Toggle search highlight using F4
 + Remove white spaces at the end of lines using F5.
-+ Use F7 or ,s to toggle the spelling using F7 and to move between suggestion using `]s`
-+ To see suggestions use `z=`
-+ Update the plugins using `:call minpac#update()`
++ Use F7 or to toggle the spelling using F7 and to move between suggestion using `]s`. To see spelling suggestions use `z=`
++ Update all the plugins using `:call minpac#update()`
++ Use `Ctrl + p` and `Crtl + n` to navigate history (first call `Esc` and `:`)
++ Use `Ctrl + ]` to jump to function definitions.
 
 
 ## Resources:
 
-- The [Tao of tmux](https://leanpub.com/the-tao-of-tmux)
-
++ [Practical Vim](https://pragprog.com/book/dnvim/practical-vim) by Drew Neil.
++ [Vim cast](http://vimcasts.org)
++ [Getting Vim and Ctags working with R](https://tinyheero.github.io/2017/05/13/r-vim-ctags.html#testing-vim--ctags-with-r)
++ The [Tao of tmux](https://leanpub.com/the-tao-of-tmux)
 
 
 ## TODO:
 
-+ Move colors to the right place in the directory tree.
++ Move color schemas to the right place in the directory tree.
 
