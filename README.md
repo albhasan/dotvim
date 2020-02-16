@@ -129,6 +129,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 ## TODO:
 
 + Move color schemas to the right place in the directory tree.
-+ Prettier lint is not working. ALE has no vim files about its configuration.
-+ styler is not working.
++ Prettier lint is not working. ALE has no vim files about its configuration. Either remove it or fix it.
++ styler is not working. Either remove it or fix it.
++ define a linter for text file. Either write-good or proselint. Is ALE using the file extension to figure the file type?
 
