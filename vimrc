@@ -1,12 +1,13 @@
-
 " NOTES:
 " - Call :set list to show invisible characters.
 " - Call :Stab to set tabstop = softtabstop = shiftwidth
 " - Use F4 to toggle search highlight.
 " - Use F5 to remove white spaces at the end of lines.
-" - Use F7 or ,s to toggle the spelling. Move between suggestion using ]s and ]s
+" - Use F7 to toggle the spelling. Move between suggestion using [s and ]s
 " - use z= to see suggestions.
-" - update the plugins calling :call minpac#update() 
+" - update the plugins calling :call minpac#update()
+" - use ctrl+p and ctrl+n to navigate command history
+
 
 set nocompatible
 
@@ -14,34 +15,17 @@ set nocompatible
 set autoindent
 set colorcolumn=80
 set expandtab
+"set hidden                   " Avoid message when switching among unsaved buffers.
 set history=200
 set incsearch
 set listchars=tab:▸\ ,eol:¬
 set nrformats=
-"set number
+"set number                   " Display line numbers.
 set ruler
 set shiftwidth=4
 set softtabstop=4
 set spelllang=en_us
 set tabstop=4
-"set hidden " Avoid message when switching among unsaved buffers.
-
-"TODO: review and finish watching the video.
-"How to Do 90% of What Plugins Do (With Just Vim) https://youtu.be/XA2WjJbmmoM
-set path+=** " search down into subfolders using :find
-set wildmenu " display all matching files when we tab complete
-
-" FILE BROWSING:
-" Tweaks for browsing
-let g:netrw_banner=0        " disable annoying banner
-let g:netrw_browse_split=4  " open in prior window
-let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-"-------
-
-
 
 
 syntax enable
@@ -52,47 +36,48 @@ filetype indent on
 filetype plugin on
 
 
-" F keys.
-:noremap          <F4> :set hlsearch! hlsearch?<CR>
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-:noremap          <F7> :set spell! spell?<CR>
-
-
 " Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
 
-" Remove white spaces at lines' end when saving.
+" Configuration of :find
+set path+=** " search down into subfolders using :find
+set wildmenu " display all matching files when we tab complete
+
+
+" Tweaks for browsing :tabedit .
+"let g:netrw_banner=0        " disable annoying banner
+"let g:netrw_browse_split=4  " open in prior window
+"let g:netrw_altv=1          " open splits to the right
+let g:netrw_liststyle=3     " tree view
+"let g:netrw_list_hide=netrw_gitignore#Hide()
+"let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+
+
 if has("autocmd")
+    "
+    " Syntax of these languages is fussy over tabs Vs spaces
+    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    "
+    " Customisations based on house-style (arbitrary)
+    autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType css        setlocal ts=2 sts=2 sw=2 expandtab
+    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+    "
+    " Treat .rss files as XML
+    autocmd BufNewFile,BufRead *.rss setfiletype xml
+    "
+    " Remove white spaces at lines' end when saving.
     autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
-endif
-
-
-" Run ctags each time a source file is saved.
-if has("autocmd")
+    "
+    " Run ctags each time a source file is saved.
     autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
 endif
 
 
-" Set specific preferences for certain source files.
-if has("autocmd")
-    " Enable file type detection
-    filetype on
-    " Syntax of these languages is fussy over tabs Vs spaces
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-    " Customisations based on house-style (arbitrary)
-    autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
-    " Treat .rss files as XML
-    autocmd BufNewFile,BufRead *.rss setfiletype xml
-endif
-
-
-" use ctags with R
-" Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
+" Use ctags with R. Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
 let g:tagbar_type_r = {
     \ 'ctagstype' : 'r',
     \ 'kinds'     : [
@@ -103,9 +88,7 @@ let g:tagbar_type_r = {
 \ }
 
 
-" Make the yanked region apparent! - make the yank operation highlight the
-" range of text that it copied (Not needed for NEOVIM)
-" http://vimcasts.org/episodes/neovim-eyecandy/
+" Make the yanked region apparent (Not needed for NEOVIM) http://vimcasts.org/episodes/neovim-eyecandy/
 if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
 endif
@@ -122,7 +105,8 @@ function! Stab()
   endif
   call SummarizeTabs()
 endfunction
-"
+
+
 function! SummarizeTabs()
   try
     echohl ModeMsg
@@ -154,14 +138,10 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 
 
-" Toggle spell checking on and off with `,s`
-let mapleader = ","
-nmap <silent> <leader>s :set spell!<CR>
-
-
 " Configure minpac
 packadd minpac
 call minpac#init()
+call minpac#add("dense-analysis/ale")
 call minpac#add("machakann/vim-highlightedyank")
 call minpac#add("mileszs/ack.vim")
 call minpac#add("nelstrom/vim-visual-star-search")
@@ -169,11 +149,42 @@ call minpac#add("tpope/vim-abolish")
 call minpac#add("tpope/vim-commentary")
 call minpac#add("tpope/vim-surround")
 call minpac#add("tpope/vim-unimpaired")
-"
-call minpac#add("dense-analysis/ale", {'type': 'opt'})
+" Optional packages.
 call minpac#add("vim/killersheep", {'type': 'opt'})
 call minpac#add("tpope/vim-fugitive", {'type': 'opt'})
 call minpac#add("tpope/vim-scriptease", {'type': 'opt'})
+
+
+" Map F keys.
+:noremap          <F4> :set hlsearch! hlsearch?<CR>
+nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
+:noremap          <F7> :set spell! spell?<CR>
+
+
+" Avoid the cursor keys when recalling commands from history
+map <C-p> <Up>
+map <C-n> <Down>
+
+
+" ALE configuration
+let g:ale_linters_explicit = 1
+let g:ale_sign_column_always=1
+let g:ale_lint_on_text_changed='always'
+let g:ale_lint_on_save=1
+let g:ale_lint_on_enter=1
+let g:ale_lint_on_filetype_changed=1
+" Only run these linters
+let g:ale_linters = {
+            \   'javascript': ['eslint'],
+            \   'python': ['flake8'],
+            \   'R': ['styler'],
+            \ }
+" Jump among linter warnigns.
+nmap <silent> [W <Plug>(ale_first)
+nmap <silent> [w <Plug>(ale_previous)
+nmap <silent> ]w <Plug>(ale_next)
+nmap <silent> ]W <Plug>(ale_last)
+
 
 
 " TODO: Review maps below.
@@ -184,9 +195,6 @@ call minpac#add("tpope/vim-scriptease", {'type': 'opt'})
 
 
 
-" Avoid the cursor keys when recalling commands from history
-map <C-p> <Up>
-map <C-n> <Down>
 
 " Use %% to expand 'edit' to the directory of the current buffer.
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -202,7 +210,7 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 
 " fixing the & command
-" practival vim page 241
+" practical vim page 241
 " & is the same as :s which repeats the last substitution.
 " no & fires :&& because it preserves flags and it is more consistent
 nnoremap & :&&<CR>
@@ -263,8 +271,7 @@ command! -nargs=* Wrap set wrap linebreak nolist
 " Moving around wrapperd lines using Cmd
 vmap <C-j> gj
 vmap <C-k> gk
-vmap <C-4> g$
-vmap <C-6> g^
+vmap <C-4> g$ vmap <C-6> g^
 vmap <C-0> g^
 nmap <C-j> gj
 nmap <C-k> gk
