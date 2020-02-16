@@ -23,6 +23,7 @@ pip3 install flake8               # python
 npm install eslint                # javascript
 R -e "install.packages('styler')" # R
 sudo apt-get install shellcheck   # bash
+sudo apt-get install chktex       # latex
 ```
 
 

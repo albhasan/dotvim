@@ -175,10 +175,11 @@ let g:ale_lint_on_enter=1
 let g:ale_lint_on_filetype_changed=1
 " Only run these linters
 let g:ale_linters = {
-            \   'sh': ['shellcheck'],
             \   'javascript': ['eslint'],
+            \   'tex': ['chktex'],
             \   'python': ['flake8'],
             \   'R': ['styler'],
+            \   'sh': ['shellcheck'],
             \ }
 " Jump among linter warnigns.
 nmap <silent> [W <Plug>(ale_first)
