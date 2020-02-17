@@ -23,7 +23,6 @@ pip3 install flake8                                # python
 pip3 install vim-vint                              # vim script
 R -e "install.packages('styler')"                  # R
 R -e "devtools::install_github('jimhester/lintr')" # R
-devtools::install_github("jimhester/lintr")
 sudo apt-get install shellcheck                    # bash
 sudo apt-get install chktex                        # latex
 sudo apt-get install python3-proselint             # latex, html, markdown
