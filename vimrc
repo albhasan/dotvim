@@ -8,9 +8,7 @@
 " - update the plugins calling :call minpac#update()
 " - use ctrl+p and ctrl+n to navigate command history
 
-
 set nocompatible
-
 
 set autoindent
 set colorcolumn=80
@@ -27,24 +25,19 @@ set softtabstop=4
 set spelllang=en_us
 set tabstop=4
 
-
 syntax enable
-
 
 filetype on
 filetype indent on
 filetype plugin on
 
-
 " Invisible character colors
 highlight NonText guifg=#4a4a59
 highlight SpecialKey guifg=#4a4a59
 
-
 " Configuration of :find
 set path+=** " search down into subfolders using :find
 set wildmenu " display all matching files when we tab complete
-
 
 " Tweaks for browsing :tabedit .
 "let g:netrw_banner=0        " disable annoying banner
@@ -53,7 +46,6 @@ set wildmenu " display all matching files when we tab complete
 let g:netrw_liststyle=3     " tree view
 "let g:netrw_list_hide=netrw_gitignore#Hide()
 "let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-
 
 if has('autocmd')
     "
@@ -64,7 +56,6 @@ if has('autocmd')
     " Customisations based on house-style (arbitrary)
     autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType css        setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
     "
     " Treat .rss files as XML
     autocmd BufNewFile,BufRead *.rss setfiletype xml
@@ -76,7 +67,6 @@ if has('autocmd')
     autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
 endif
 
-
 " Use ctags with R. Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
 let g:tagbar_type_r = {
     \ 'ctagstype' : 'r',
@@ -87,12 +77,10 @@ let g:tagbar_type_r = {
     \ ]
 \ }
 
-
 " Make the yanked region apparent (Not needed for NEOVIM) http://vimcasts.org/episodes/neovim-eyecandy/
 if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
 endif
-
 
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
@@ -105,7 +93,6 @@ function! Stab()
   endif
   call SummarizeTabs()
 endfunction
-
 
 function! SummarizeTabs()
   try
@@ -123,7 +110,6 @@ function! SummarizeTabs()
   endtry
 endfunction
 
-
 " Remove white spaces at the end of lines.
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
@@ -136,7 +122,6 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-
 
 " Configure minpac
 packadd minpac
@@ -154,17 +139,14 @@ call minpac#add('vim/killersheep', {'type': 'opt'})
 call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 
-
 " Map F keys.
 :noremap          <F4> :set hlsearch! hlsearch?<CR>
 nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
 :noremap          <F7> :set spell! spell?<CR>
 
-
 " Avoid the cursor keys when recalling commands from history
 map <C-p> <Up>
 map <C-n> <Down>
-
 
 " ALE configuration
 let g:ale_linters_explicit = 1
@@ -175,20 +157,23 @@ let g:ale_lint_on_enter=1
 let g:ale_lint_on_filetype_changed=1
 " Only run these linters
 let g:ale_linters = {
-            \   'css':  ['prettier'],
-            \   'html':  ['prettier', 'proselint', 'write-good'],
+            \   'bib':        ['bibclean'],
+            \   'c':          ['clang'],
+            \   'cpp':        ['clangtidy'],
+            \   'css':        ['prettier'],
+            \   'html':       ['prettier', 'proselint', 'write-good'],
             \   'javascript': ['prettier', 'eslint'],
-            \   'json': ['prettier', 'jsonlint'],
-            \   'markdown':  ['proselint', 'write-good'],
-            \   'python': ['flake8'],
-            \   'r': ['styler', 'lintr'],
-            \   'sh': ['shellcheck'],
-            \   'tex':  ['chktex', 'proselint', 'write-good'],
-            \   'text': ['chktex', 'proselint', 'write-good'],
-            \   'vim': ['vint'],
-            \   'xhtml':  ['proselint', 'write-good'],
-            \   'xml':  ['xmllint'],
-            \   'yaml':  ['prettier'],
+            \   'json':       ['prettier', 'jsonlint'],
+            \   'markdown':   ['proselint', 'write-good'],
+            \   'python':     ['flake8'],
+            \   'r':          ['styler', 'lintr'],
+            \   'sh':         ['shellcheck'],
+            \   'tex':        ['chktex', 'proselint', 'write-good'],
+            \   'text':       ['chktex', 'proselint', 'write-good'],
+            \   'vim':        ['vint'],
+            \   'xhtml':      ['proselint', 'write-good'],
+            \   'xml':        ['xmllint'],
+            \   'yaml':       ['prettier'],
             \ }
 " Jump among linter warnigns.
 nmap <silent> [W <Plug>(ale_first)
