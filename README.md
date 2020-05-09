@@ -11,6 +11,9 @@
 sudo apt install vim
 #sudo apt install neovim
 sudo apt install ack-grep
+sudo apt install bibclean
+sudo apt install clang
+sudo apt install clang-tidy
 sudo apt install git
 sudo apt-get install exuberant-ctags
 ```
