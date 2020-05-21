@@ -118,6 +118,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Update all the plugins using `:call minpac#update()`
 + Use `Ctrl + p` and `Crtl + n` to navigate history (first call `Esc` and `:`)
 + Use `Ctrl + ]` to jump to function definitions and `Ctrl + T` to get back.
++ Use `gc` to comment lines of code.
 
 
 ## Resources:
