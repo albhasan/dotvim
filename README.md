@@ -119,6 +119,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Use `Ctrl + p` and `Crtl + n` to navigate history (first call `Esc` and `:`)
 + Use `Ctrl + ]` to jump to function definitions and `Ctrl + T` to get back.
 + Use `gc` to comment lines of code.
++ Use `Ctrl + r 0` to paste yanked text.
 
 
 ## Resources:
