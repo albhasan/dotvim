@@ -100,9 +100,10 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 `:packadd vim-scriptease`
 
 
-### Deactivate Caps Lock by adding the following to `.bashrc`
+### Make the Caps Lock behave as the Ctrl key by adding the following to `.bashrc`
 
-`setxkbmap -option ctrl:nocaps`
+`setxkbmap -option ctrl:ctrl_modifier`
+
 
 
 
