@@ -1,15 +1,3 @@
 [submodule "tmux-config"]
 	path = tmux-config
 	url = https://github.com/tony/tmux-config.git
-[submodule "/home/alber/dotvim/pack/git-plugins/start/ale"]
-	path = /home/alber/dotvim/pack/git-plugins/start/ale
-	url = https://github.com/dense-analysis/ale.git
-[submodule "/home/alber/dotvim/pack/git-plugins/start/vim-abolish"]
-	path = /home/alber/dotvim/pack/git-plugins/start/vim-abolish
-	url = https://github.com/tpope/vim-abolish.git
-[submodule "/home/alber/dotvim/pack/git-plugins/start/vim-commentary"]
-	path = /home/alber/dotvim/pack/git-plugins/start/vim-commentary
-	url = https://github.com/tpope/vim-commentary.git
-[submodule "/home/alber/dotvim/pack/git-plugins/start/vim-fugitive"]
-	path = /home/alber/dotvim/pack/git-plugins/start/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
