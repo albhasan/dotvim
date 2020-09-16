@@ -7,6 +7,7 @@
 " - use z= to see suggestions.
 " - update the plugins calling :call minpac#update()
 " - use ctrl+p and ctrl+n to navigate command history
+" - use Q to search-next and replace
 
 set nocompatible
 
@@ -24,6 +25,7 @@ set shiftwidth=4
 set softtabstop=4
 set spelllang=en_us
 set tabstop=4
+colo murphy
 
 syntax enable
 
@@ -50,12 +52,12 @@ let g:netrw_liststyle=3     " tree view
 if has('autocmd')
     "
     " Syntax of these languages is fussy over tabs Vs spaces
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    "autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+    "autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
     "
     " Customisations based on house-style (arbitrary)
-    autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType css        setlocal ts=2 sts=2 sw=2 expandtab
+    "autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
+    "autocmd FileType css        setlocal ts=2 sts=2 sw=2 expandtab
     "
     " Treat .rss files as XML
     autocmd BufNewFile,BufRead *.rss setfiletype xml
@@ -225,7 +227,7 @@ map <C-l> <C-w>l
 
 " Working with tabs
 " http://vimcasts.org/episodes/working-with-tabs/
-    " Navigate tabs usind the Ctrl key
+" Navigate tabs usind the Ctrl key
 map <C-S-]> gt
 map <C-S-[> gT
 map <C-1> 1gt
