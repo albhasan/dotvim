@@ -67,6 +67,9 @@ if has('autocmd')
     "
     " Run ctags each time a source file is saved.
     autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
+    "
+    " YAML - https://www.arthurkoziel.com/setting-up-vim-for-yaml/index.html
+    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 endif
 
 " Use ctags with R. Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
@@ -175,7 +178,7 @@ let g:ale_linters = {
             \   'vim':        ['vint'],
             \   'xhtml':      ['proselint', 'write-good'],
             \   'xml':        ['xmllint'],
-            \   'yaml':       ['prettier'],
+            \   'yaml':       ['yamllint'],
             \ }
 " Jump among linter warnigns.
 nmap <silent> [W <Plug>(ale_first)

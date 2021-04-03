@@ -31,6 +31,7 @@ sudo apt-get install shellcheck                    # bash
 sudo apt-get install chktex                        # latex
 sudo apt-get install python3-proselint             # latex, html, markdown
 sudo apt-get install libxml2-utils                 # xml
+sudo apt install yamllint                          # yaml
 sudo npm install -g eslint                         # javascript
 sudo npm install -g write-good                     # text, html, markdown
 sudo npm install -g prettier                       # yaml
