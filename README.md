@@ -23,13 +23,13 @@ sudo apt install tmux
 ### Install linters:
 
 ```
-pip3 install flake8                                # python
 pip3 install vim-vint                              # vim script
 R -e "install.packages('styler')"                  # R
 R -e "devtools::install_github('jimhester/lintr')" # R
 sudo apt-get install shellcheck                    # bash
 sudo apt-get install chktex                        # latex
 sudo apt-get install python3-proselint             # latex, html, markdown
+sudo apt-get install flake8
 sudo apt-get install libxml2-utils                 # xml
 sudo apt install yamllint                          # yaml
 sudo npm install -g eslint                         # javascript
