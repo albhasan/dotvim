@@ -113,7 +113,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 
 
 
-## Usage notes:
+## Usage notes vim:
 
 + Change background using `:set background=dark`
 + Cange colors using `:colorscheme solarized8`
@@ -127,6 +127,30 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Use `Ctrl + ]` to jump to function definitions and `Ctrl + T` to get back.
 + Use `gc` to comment lines of code.
 + Use `Ctrl + r 0` to paste yanked text.
+
+
+## Usage notes tmux:
+
++ List sessions `tmux ls`
++ Attach session `Ctrl + at -t session_name`
++ Dettach session `Ctrl + d`
++ New session `tmux new -s session_name`
+
++ New window `Ctrl + A + c`
++ Show windows `Ctrl + A + x`
++ Rename window `Ctrl + A + ,`
++ Move to next window `Ctrl + n`
+
++ Split panel horizontally ` Ctrl + A + "`
++ Split panel vertically ` Ctrl +A + %`
++ Switch panes (e.g. horizontal to vertical) `Ctrl + A + space bar`
++ Zoom to pane `Ctrl + A + z`
++ Change focus to panel below `Ctrl + A + j`
++ Change focus to panel up `Ctrl + A + j`
++ Change focus to panel right `Ctrl + A + l`
++ Change focus to panel left `Ctrl + A + r`
++ Resize panel (keep Ctrl + A down) `Ctrl + A + arrow`
+
 
 
 ## Resources:
