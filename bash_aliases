@@ -38,3 +38,20 @@ alias tgz='tar -xvfz'
 # Search file by name
 alias ff='find . -type f -iname'
 
+#---------------
+# Linux essentials https://youtu.be/Ok_kD_sgNcs
+
+# Pretty print mounted partitions 
+alias lsmount="mount | column -t"
+
+# Print my external ip address.
+alias extip="curl icanhazip.com"
+
+# Speed test
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
+
+# Top 5 processes using the most memory.
+alias mem5="ps auxf | sort -nr -k 4 | head -5"
+
+# Top t processes using the most cpu.
+alias cpu5="ps auxf | sort -nr -k 3 | head -5"
