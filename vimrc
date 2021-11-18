@@ -1,3 +1,6 @@
+set encoding=utf-8
+scriptencoding utf-8
+
 " NOTES:
 " - Call :set list to show invisible characters.
 " - Call :Stab to set tabstop = softtabstop = shiftwidth
@@ -50,27 +53,44 @@ let g:netrw_liststyle=3     " tree view
 "let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 if has('autocmd')
-    "
     " Syntax of these languages is fussy over tabs Vs spaces
     "autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
     "autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-    "
+    
     " Customisations based on house-style (arbitrary)
     "autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
     "autocmd FileType css        setlocal ts=2 sts=2 sw=2 expandtab
-    "
-    " Treat .rss files as XML
-    autocmd BufNewFile,BufRead *.rss setfiletype xml
-    "
-    " Remove white spaces at lines' end when saving.
-    autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
-    "
-    " Run ctags each time a source file is saved.
-    autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
-    "
-    " YAML - https://www.arthurkoziel.com/setting-up-vim-for-yaml/index.html
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+   
+    augroup rss
+        " Treat .rss files as XML
+        autocmd BufNewFile,BufRead *.rss setfiletype xml
+    augroup END
+
+    augroup trailingspaces
+        " Remove white spaces at lines' end when saving.
+        autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
+    augroup END
+
+    augroup ctags
+        " Run ctags each time a source file is saved.
+        autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
+    augroup END
+
+    augroup yaml
+        " YAML - https://www.arthurkoziel.com/setting-up-vim-for-yaml/index.html
+        autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+    augroup END
+    
+    augroup pandoc
+        " Filter HTML through PANDOC
+        " The gq operation runs the selected text through the filter specified by formatprg
+        " http://vimcasts.org/episodes/using-external-filter-commands-to-reformat-html/
+        let pandoc_pipeline  = 'pandoc --from=html --to=markdown'
+        let pandoc_pipeline .= ' | pandoc --from=markdown --to=html'
+        autocmd FileType html let &l:formatprg=pandoc_pipeline
+    augroup END
 endif
+
 
 " Use ctags with R. Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
 let g:tagbar_type_r = {
@@ -312,14 +332,6 @@ nnoremap <silent> [B :bfirst<CR>
 nnoremap <silent> ]B :blast<CR>
 
 
-" Filter HTML through PANDOC
-" The gq operation runs the selected text through the filter specified by formatprg
-" http://vimcasts.org/episodes/using-external-filter-commands-to-reformat-html/
-if has('autocmd')
-  let pandoc_pipeline  = 'pandoc --from=html --to=markdown'
-  let pandoc_pipeline .= ' | pandoc --from=markdown --to=html'
-  autocmd FileType html let &l:formatprg=pandoc_pipeline
-endif
 
 
 " How to use tabs
