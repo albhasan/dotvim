@@ -159,6 +159,7 @@ call minpac#add('tpope/vim-abolish')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
+call minpac#add('vim-airline/vim-airline')
 " Optional packages.
 call minpac#add('vim/killersheep', {'type': 'opt'})
 call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
@@ -190,7 +191,7 @@ let g:ale_linters = {
             \   'javascript': ['prettier', 'eslint'],
             \   'json':       ['prettier', 'jsonlint'],
             \   'markdown':   ['proselint', 'write-good'],
-            \   'python':     ['flake8'],
+            \   'python':     ['pylint'],
             \   'r':          ['styler', 'lintr'],
             \   'sh':         ['shellcheck'],
             \   'tex':        ['chktex', 'proselint', 'write-good'],
