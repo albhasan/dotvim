@@ -181,6 +181,7 @@ let g:ale_lint_on_text_changed='always'
 let g:ale_lint_on_save=1
 let g:ale_lint_on_enter=1
 let g:ale_lint_on_filetype_changed=1
+let g:ale_set_signs=0
 " Only run these linters
 let g:ale_linters = {
             \   'bib':        ['bibclean'],
