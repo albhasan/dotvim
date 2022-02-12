@@ -12,17 +12,16 @@ scriptencoding utf-8
 " - use ctrl+p and ctrl+n to navigate command history
 " - use Q to search-next and replace
 
+
 set nocompatible
 
 set autoindent
 set colorcolumn=80
 set expandtab
-"set hidden                   " Avoid message when switching among unsaved buffers.
 set history=200
 set incsearch
 set listchars=tab:▸\ ,eol:¬
 set nrformats=
-"set number                   " Display line numbers.
 set ruler
 set shiftwidth=4
 set softtabstop=4
@@ -48,47 +47,30 @@ set wildmenu " display all matching files when we tab complete
 "let g:netrw_banner=0        " disable annoying banner
 "let g:netrw_browse_split=4  " open in prior window
 "let g:netrw_altv=1          " open splits to the right
-let g:netrw_liststyle=3     " tree view
+"let g:netrw_liststyle=3     " tree view
 "let g:netrw_list_hide=netrw_gitignore#Hide()
 "let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
 
 if has('autocmd')
-    " Syntax of these languages is fussy over tabs Vs spaces
-    "autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    "autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-    
-    " Customisations based on house-style (arbitrary)
-    "autocmd FileType html       setlocal ts=2 sts=2 sw=2 expandtab
-    "autocmd FileType css        setlocal ts=2 sts=2 sw=2 expandtab
-   
+
     augroup rss
+        autocmd!
         " Treat .rss files as XML
         autocmd BufNewFile,BufRead *.rss setfiletype xml
     augroup END
 
     augroup trailingspaces
+        autocmd!
         " Remove white spaces at lines' end when saving.
         autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
     augroup END
 
     augroup ctags
+        autocmd!
         " Run ctags each time a source file is saved.
         autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
     augroup END
 
-    augroup yaml
-        " YAML - https://www.arthurkoziel.com/setting-up-vim-for-yaml/index.html
-        autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-    augroup END
-    
-    augroup pandoc
-        " Filter HTML through PANDOC
-        " The gq operation runs the selected text through the filter specified by formatprg
-        " http://vimcasts.org/episodes/using-external-filter-commands-to-reformat-html/
-        let pandoc_pipeline  = 'pandoc --from=html --to=markdown'
-        let pandoc_pipeline .= ' | pandoc --from=markdown --to=html'
-        autocmd FileType html let &l:formatprg=pandoc_pipeline
-    augroup END
 endif
 
 
@@ -109,6 +91,11 @@ endif
 
 " Set tabstop, softtabstop and shiftwidth to the same value
 command! -nargs=* Stab call Stab()
+
+
+
+"---- Functions ----
+
 function! Stab()
   let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
   if l:tabstop > 0
@@ -148,7 +135,9 @@ function! <SID>StripTrailingWhitespaces()
     call cursor(l, c)
 endfunction
 
-" Configure minpac
+
+
+"---- Configure minpac ----
 packadd minpac
 call minpac#init()
 call minpac#add('dense-analysis/ale')
@@ -160,19 +149,33 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
-" Optional packages.
 call minpac#add('vim/killersheep', {'type': 'opt'})
 call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 
-" Map F keys.
-:noremap          <F4> :set hlsearch! hlsearch?<CR>
-nnoremap <silent> <F5> :call <SID>StripTrailingWhitespaces()<CR>
-:noremap          <F7> :set spell! spell?<CR>
 
-" Avoid the cursor keys when recalling commands from history
-map <C-p> <Up>
-map <C-n> <Down>
+
+"---- Abbreviations ----
+:iabbrev adn  and
+:iabbrev waht what
+:iabbrev tehn then
+
+
+
+"---- Remaps ----
+
+let mapleader=','
+
+:noremap           <F4>  :set hlsearch! hlsearch?<CR>
+:noremap           <F7>  :set spell! spell?<CR>
+:noremap  <Up>     <NOP>
+:noremap  <Down>   <NOP>
+:noremap  <Left>   <NOP>
+:noremap  <Right>  <NOP>
+:nnoremap <leader>ev     :vsplit $MYVIMRC<cr>  " open vimrc for a rapid change
+:nnoremap <leader>sv     :source $MYVIMRC<cr>  " source vimrc
+:nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " quote the current word
+:nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel " quote the current word
 
 " ALE configuration
 let g:ale_linters_explicit = 1
@@ -219,25 +222,13 @@ nmap <silent> ]W <Plug>(ale_last)
 
 
 
-" Use %% to expand 'edit' to the directory of the current buffer.
-cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " extent the ability of the % operator to keywords in some languages.
 runtime macros/matchit.vim
 
-" search-next and replace using Q
-nnoremap Q :normal n.<CR>
-
-" Mute highlight
-nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 
-" fixing the & command
-" practical vim page 241
-" & is the same as :s which repeats the last substitution.
-" no & fires :&& because it preserves flags and it is more consistent
-nnoremap & :&&<CR>
-xnoremap & :&&<CR>
+
 
 
 "  Working with windows
@@ -252,29 +243,21 @@ map <C-l> <C-w>l
 
 " Working with tabs
 " http://vimcasts.org/episodes/working-with-tabs/
-" Navigate tabs usind the Ctrl key
+" Navigate tabs using the Ctrl key
 map <C-S-]> gt
 map <C-S-[> gT
-map <C-1> 1gt
-map <C-2> 2gt
-map <C-3> 3gt
-map <C-4> 4gt
-map <C-5> 5gt
-map <C-6> 6gt
-map <C-7> 7gt
-map <C-8> 8gt
-map <C-9> 9gt
-map <C-0> :tablast<CR>
+map <C-1>  1gt
+map <C-2>  2gt
+map <C-3>  3gt
+map <C-4>  4gt
+map <C-5>  5gt
+map <C-6>  6gt
+map <C-7>  7gt
+map <C-8>  8gt
+map <C-9>  9gt
+map <C-0>  :tablast<CR>
 
 
-" The :edit command
-" http://vimcasts.org/episodes/the-edit-command/
-" Open a file relative to the current one
-let mapleader=','
-map <leader>ew :e <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>es :sp <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>ev :vsp <C-R>=expand("%:p:h") . "/" <CR>
-map <leader>et :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
 
 " Soft wrapping text
@@ -311,27 +294,6 @@ nmap <C-Down> ddp
 vmap <C-Up> xkP`[V`]
 vmap <C-Down> xp`[V`]
 
-
-" Habit breaking, habit making
-" http://vimcasts.org/blog/2013/02/habit-breaking-habit-making/
-" Do NOT use the arrow keys!
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-" Move more than one column or row at the time!
-"noremap h <NOP>
-"noremap j <NOP>
-"noremap k <NOP>
-"noremap l <NOP>
-
-
-" create mappings to quickly traverse vim's lists
-" pactical vim page 101
-nnoremap <silent> [b :bprevious<CR>
-nnoremap <silent> ]b :bnext<CR>
-nnoremap <silent> [B :bfirst<CR>
-nnoremap <silent> ]B :blast<CR>
 
 
 
