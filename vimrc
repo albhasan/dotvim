@@ -138,6 +138,7 @@ endfunction
 
 
 "---- Configure minpac ----
+"
 packadd minpac
 call minpac#init()
 call minpac#add('dense-analysis/ale')
@@ -149,6 +150,7 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
+call minpac#add('yegappan/taglist')
 call minpac#add('vim/killersheep', {'type': 'opt'})
 call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
