@@ -38,6 +38,7 @@ alias tgz='tar -xvfz'
 # Search file by name
 alias ff='find . -type f -iname'
 
+
 #---------------
 # Linux essentials https://youtu.be/Ok_kD_sgNcs
 
