@@ -125,7 +125,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Use F7 or to toggle the spelling using F7 and to move between suggestion using `]s`. To see spelling suggestions use `z=`
 + Update all the plugins using `:call minpac#update()`
 + Use `Ctrl + p` and `Crtl + n` to navigate history (first call `Esc` and `:`)
-+ Use `Ctrl + ]` to jump to function definitions and `Ctrl + T` to get back.
++ Use `Ctrl + ]` to jump to function definitions and `Ctrl + t` to get back.
 + Use `gc` to comment lines of code.
 + Use `Ctrl + r 0` to paste yanked text.
 
