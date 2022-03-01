@@ -1,32 +1,50 @@
 set encoding=utf-8
 scriptencoding utf-8
 
-" NOTES:
-" - Call :set list to show invisible characters.
-" - Call :Stab to set tabstop = softtabstop = shiftwidth
-" - Use F4 to toggle search highlight.
-" - Use F5 to remove white spaces at the end of lines.
-" - Use F7 to toggle the spelling. Move between suggestion using [s and ]s
-" - use z= to see suggestions.
+"---- NOTES ---- {{{
 " - update the plugins calling :call minpac#update()
+" - Call :set list to show invisible characters.
+" - Use F4 to toggle search highlight.
+" - Call :Stab to set tabstop = softtabstop = shiftwidth
 " - use ctrl+p and ctrl+n to navigate command history
+"
+" SPELLING:
+" - Use F7 to toggle the spelling. 
+" - Move between suggestion using [s and ]s.
+" - use z= to see suggestions.
+"
+" CODE NAVIGATION (CTAGS):
+" - Find a function :ta myfunction
+" - Go to definition from call: Ctrl + ]
+" - Return to call: Ctrl + t
+"
+" CODE NAVIGATION (TagList package):
+" - Show structure      :TlistOpen
+" - Jump to definition  Enter
+" - Show signature      Space bar
+"
+" TODO: check
 " - use Q to search-next and replace
+"}}}
 
 
+
+"---- Basic settings ---- {{{
 set nocompatible
-
 set autoindent
 set colorcolumn=80
-set expandtab
 set history=200
 set incsearch
 set listchars=tab:▸\ ,eol:¬
 set nrformats=
 set ruler
+set spelllang=en_us
+set expandtab
 set shiftwidth=4
 set softtabstop=4
-set spelllang=en_us
 set tabstop=4
+set wrap lbr nolist
+
 colo murphy
 
 syntax enable
@@ -43,14 +61,11 @@ highlight SpecialKey guifg=#4a4a59
 set path+=** " search down into subfolders using :find
 set wildmenu " display all matching files when we tab complete
 
-" Tweaks for browsing :tabedit .
-"let g:netrw_banner=0        " disable annoying banner
-"let g:netrw_browse_split=4  " open in prior window
-"let g:netrw_altv=1          " open splits to the right
-"let g:netrw_liststyle=3     " tree view
-"let g:netrw_list_hide=netrw_gitignore#Hide()
-"let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+"}}}
 
+
+
+"---- FileType-specific settings ---- {{{
 if has('autocmd')
 
     augroup rss
@@ -67,14 +82,22 @@ if has('autocmd')
 
     augroup ctags
         autocmd!
-        " Run ctags each time a source file is saved.
-        autocmd BufWritePost *.py,*.js,*.R call system("ctags -R")
+       " Run ctags each time a source file is saved.
+       autocmd BufWritePost *.py,*.js,*.R,*.c,*.cpp,*.h call system("ctags -R")
+    augroup END
+
+    augroup filetype_vim
+        autocmd!
+        autocmd FileType vim setlocal foldmethod=marker
     augroup END
 
 endif
+" }}}
+    
 
 
-" Use ctags with R. Getting Vim + Ctags Working with R https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
+" Use ctags with R. Getting Vim + Ctags Working with R 
+" https://tinyheero.github.io/2017/05/13/r-vim-ctags.html
 let g:tagbar_type_r = {
     \ 'ctagstype' : 'r',
     \ 'kinds'     : [
@@ -84,7 +107,8 @@ let g:tagbar_type_r = {
     \ ]
 \ }
 
-" Make the yanked region apparent (Not needed for NEOVIM) http://vimcasts.org/episodes/neovim-eyecandy/
+" Make the yanked region apparent (Not needed for NEOVIM) 
+" http://vimcasts.org/episodes/neovim-eyecandy/
 if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
 endif
@@ -94,51 +118,8 @@ command! -nargs=* Stab call Stab()
 
 
 
-"---- Functions ----
 
-function! Stab()
-  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
-  if l:tabstop > 0
-    let &l:sts = l:tabstop
-    let &l:ts = l:tabstop
-    let &l:sw = l:tabstop
-  endif
-  call SummarizeTabs()
-endfunction
-
-function! SummarizeTabs()
-  try
-    echohl ModeMsg
-    echon 'tabstop='.&l:ts
-    echon ' shiftwidth='.&l:sw
-    echon ' softtabstop='.&l:sts
-    if &l:et
-      echon ' expandtab'
-    else
-      echon ' noexpandtab'
-    endif
-  finally
-    echohl None
-  endtry
-endfunction
-
-" Remove white spaces at the end of lines.
-function! <SID>StripTrailingWhitespaces()
-    " Preparation: save last search, and cursor position.
-    let _s=@/
-    let l = line('.')
-    let c = col('.')
-    " Do the business:
-    %s/\s\+$//e
-    " Clean up: restore previous search history, and cursor position
-    let @/=_s
-    call cursor(l, c)
-endfunction
-
-
-
-"---- Configure minpac ----
-"
+"---- Configure minpac ---- {{{
 packadd minpac
 call minpac#init()
 call minpac#add('dense-analysis/ale')
@@ -154,17 +135,19 @@ call minpac#add('yegappan/taglist')
 call minpac#add('vim/killersheep', {'type': 'opt'})
 call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
+"}}}
 
 
 
-"---- Abbreviations ----
+"---- Abbreviations ---- {{{
 :iabbrev adn  and
 :iabbrev waht what
 :iabbrev tehn then
+"}}}
 
 
 
-"---- Remaps ----
+"---- Mappings ---- {{{
 
 let mapleader=','
 
@@ -178,8 +161,19 @@ let mapleader=','
 :nnoremap <leader>sv     :source $MYVIMRC<cr>  " source vimrc
 :nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " quote the current word
 :nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel " quote the current word
+"
+" Bubble single lines
+" http://vimcasts.org/episodes/bubbling-text/
+"nmap <C-Up> ddkP
+"nmap <C-Down> ddp
+" Bubble multiple lines
+"vmap <C-Up> xkP`[V`]
+"vmap <C-Down> xp`[V`]
+"}}}
 
-" ALE configuration
+
+
+"---- ALE configuration ---- {{{
 let g:ale_linters_explicit = 1
 let g:ale_sign_column_always=1
 let g:ale_lint_on_text_changed='always'
@@ -209,105 +203,66 @@ let g:ale_linters = {
             \ }
 " Jump among linter warnigns.
 nmap <silent> [W <Plug>(ale_first)
+nmap <silent> ]W <Plug>(ale_last)
 nmap <silent> [w <Plug>(ale_previous)
 nmap <silent> ]w <Plug>(ale_next)
-nmap <silent> ]W <Plug>(ale_last)
+"}}}
 
 
 
-" TODO: Review maps below.
+"---- Functions ---- {{{
+
+" Set the tabstop, softtabstop, and shiftwidth at once
+function! Stab()
+  let l:tabstop = 1 * input('set tabstop = softtabstop = shiftwidth = ')
+  if l:tabstop > 0
+    let &l:sts = l:tabstop
+    let &l:ts = l:tabstop
+    let &l:sw = l:tabstop
+  endif
+  call SummarizeTabs()
+endfunction
+
+" Print the current values of tabstop, shiftwidth, and softtabstop.
+function! SummarizeTabs()
+  try
+    echohl ModeMsg
+    echon 'tabstop='.&l:ts
+    echon ' shiftwidth='.&l:sw
+    echon ' softtabstop='.&l:sts
+    if &l:et
+      echon ' expandtab'
+    else
+      echon ' noexpandtab'
+    endif
+  finally
+    echohl None
+  endtry
+endfunction
+
+" Remove white spaces at the end of lines.
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line('.')
+    let c = col('.')
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+"}}}
 
 
 
+"---- Status Line ---- {{{
+"}}}
 
 
+" NOTE: Review maps below.
 
 
-
-
-" extent the ability of the % operator to keywords in some languages.
-runtime macros/matchit.vim
-
-
-
-
-
-
-"  Working with windows
-" http://vimcasts.org/episodes/working-with-windows/
-" Move between windows wihtout having to press Ctrl-w.
-map <C-h> <C-w>h
-map <C-j> <C-w>j
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-
-
-
-" Working with tabs
-" http://vimcasts.org/episodes/working-with-tabs/
-" Navigate tabs using the Ctrl key
-map <C-S-]> gt
-map <C-S-[> gT
-map <C-1>  1gt
-map <C-2>  2gt
-map <C-3>  3gt
-map <C-4>  4gt
-map <C-5>  5gt
-map <C-6>  6gt
-map <C-7>  7gt
-map <C-8>  8gt
-map <C-9>  9gt
-map <C-0>  :tablast<CR>
-
-
-
-
-" Soft wrapping text
-" http://vimcasts.org/episodes/soft-wrapping-text/
-"
-" Break lines without breaking words.
-" :set wrap
-" :set linebreak
-" :set nolist
-"
-" one liner
-" :set wrap lbr nolist
-"
-" :Wrap function
-command! -nargs=* Wrap set wrap linebreak nolist
-"
-" Moving around wrapperd lines using Cmd
-vmap <C-j> gj
-vmap <C-k> gk
-vmap <C-4> g$ vmap <C-6> g^
-vmap <C-0> g^
-nmap <C-j> gj
-nmap <C-k> gk
-nmap <C-4> g$
-nmap <C-6> g^
-nmap <C-0> g^
-
-
-" Bubble single lines
-" http://vimcasts.org/episodes/bubbling-text/
-nmap <C-Up> ddkP
-nmap <C-Down> ddp
-" Bubble multiple lines
-vmap <C-Up> xkP`[V`]
-vmap <C-Down> xp`[V`]
-
-
-
-
-
-" How to use tabs
-" http://vimcasts.org/episodes/how-to-use-tabs/
-" Each tab has its own directory, hence, each tab can hande a project.
-" Use vimgrep to find a text in a project.
-
-
-" Creating the Vimcasts logo as ASCII art
-" http://vimcasts.org/episodes/creating-the-vimcasts-logo-as-ascii-art/
 
 
 " Using the changelist and jumplist
