@@ -2,6 +2,7 @@ set encoding=utf-8
 scriptencoding utf-8
 
 "---- NOTES ---- {{{
+"
 " - update the plugins calling :call minpac#update()
 " - Call :set list to show invisible characters.
 " - Use F4 to toggle search highlight.
@@ -13,6 +14,23 @@ scriptencoding utf-8
 " - Move between suggestion using [s and ]s.
 " - use z= to see suggestions.
 "
+" COMMENTS:
+" - Comment current word ,' or ,"
+" - Comment selection using gc after selection
+" - Comment current line using gcc
+"
+"
+" CHANGE QUOTATION MARKS:
+" - From inside quoted text, press cs<old_quote><new_quote> to change quotes.
+" - Press ds<quote> to remove quotes.
+" - Press ysiw[ to put word into brakets
+"
+" AUTO COMPLETE (CTAGS):
+" - Ctrl+n to complete current word using next match in insert mode.
+" - Ctrl+p to complete current word using next match in insert mode.
+" - Ctrl+] jump to definition.
+" - g+]    jump to definition (interactive).
+"
 " CODE NAVIGATION (CTAGS):
 " - Find a function :ta myfunction
 " - Go to definition from call: Ctrl + ]
@@ -22,6 +40,17 @@ scriptencoding utf-8
 " - Show structure      :TlistOpen
 " - Jump to definition  Enter
 " - Show signature      Space bar
+"
+" SPLITS
+" - Horizonal split                  :sp
+" - Vertical split                   :vsp
+" - Move between splits              Ctrl+w
+" - Move between splits horizontally Ctrl+w+j Ctrl+w+k 
+" - Move between splits vertically   Crtl+w+h Ctrl+w+l
+" - Close current split              :q
+"
+" PASTE
+" - Use "{0-9}p to paster former cutted texts.
 "
 " TODO: check
 " - use Q to search-next and replace
