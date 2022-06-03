@@ -128,12 +128,12 @@ call minpac#add('mileszs/ack.vim')
 call minpac#add('nelstrom/vim-visual-star-search')
 call minpac#add('tpope/vim-abolish')
 call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('vim-airline/vim-airline')
 call minpac#add('yegappan/taglist')
 call minpac#add('vim/killersheep', {'type': 'opt'})
-call minpac#add('tpope/vim-fugitive', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
 "}}}
 
