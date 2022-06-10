@@ -71,12 +71,15 @@ git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt/minpac
 
 ```
 cd ~/dotvim
-git submodule update --init
-git submodule update --remote tmux-config/
+git clone https://github.com/tony/tmux-config.git
 cd ~/dotvim/tmux-config
-git submodule update --init
-git submodule update --remote vendor/tmux-mem-cpu-load
-cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load && cmake . && make && sudo make install
+cd ~/dotvim/tmux-config/vendor
+rm -rf ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load
+git clone https://github.com/thewtex/tmux-mem-cpu-load.git
+cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load
+cmake .
+make
+sudo make install
 ```
 
 
