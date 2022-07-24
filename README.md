@@ -8,7 +8,7 @@
 ### Install software:
 
 ```
-#sudo apt install vim
+sudo apt install vim
 #sudo apt install neovim
 sudo apt install ack-grep
 sudo apt install bibclean
@@ -17,6 +17,9 @@ sudo apt install clang-tidy
 sudo apt install git
 sudo apt-get install exuberant-ctags
 sudo apt install tmux 
+sudo apt install python3-pip
+sudo apt install npm
+sudo apt install cmake
 ```
 
 
@@ -25,7 +28,7 @@ sudo apt install tmux
 ```
 pip3 install vim-vint                              # vim script
 pip3 install pylint                                # python
-R -e "install.packages('styler')"                  # R
+R -e "install.packages(c('devtools', 'styler))"    # R
 R -e "devtools::install_github('jimhester/lintr')" # R
 sudo apt-get install shellcheck                    # bash
 sudo apt-get install chktex                        # latex
@@ -59,10 +62,13 @@ EOM
 ### Get vim configuration:
 
 ```
-cd ~
+mkdir -p ~/Documents/github
+cd ~/Documents/github
 git clone https://github.com/albhasan/dotvim.git
-mkdir -p ~/dotvim/pack/minpac/opt
-git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt/minpac
+cd dotvim
+mkdir -p pack/minpac/opt
+cd pack/minpac/opt
+git clone https://github.com/k-takata/minpac.git 
 # Don't forget to update the plugins! Run from inside vim :call minpac#update()
 ```
 
@@ -70,13 +76,12 @@ git clone https://github.com/k-takata/minpac.git ~/dotvim/pack/minpac/opt/minpac
 ### Get TMUX configuration:
 
 ```
-cd ~/dotvim
+cd ~/Documents/github/dotvim
 git clone https://github.com/tony/tmux-config.git
-cd ~/dotvim/tmux-config
-cd ~/dotvim/tmux-config/vendor
-rm -rf ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load
+cd tmux-config/vendor
+rm -rf tmux-mem-cpu-load
 git clone https://github.com/thewtex/tmux-mem-cpu-load.git
-cd ~/dotvim/tmux-config/vendor/tmux-mem-cpu-load
+cd tmux-mem-cpu-load
 cmake .
 make
 sudo make install
@@ -86,10 +91,10 @@ sudo make install
 ### Create symlinks:
 
 ```
-ln -s ~/dotvim                        ~/.vim                          
-ln -s ~/dotvim/tmux-config            ~/.tmux
-ln -s ~/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
-ln -s ~/dotvim/bash_aliases             ~/.bash_aliases
+ln -s ~/Documents/github/dotvim                        ~/.vim
+ln -s ~/Documents/github/dotvim/tmux-config            ~/.tmux
+ln -s ~/Documents/github/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
+ln -s ~/Documents/github/dotvim/bash_aliases           ~/.bash_aliases
 
 # neovim
 mkdir -p ~/.config/nvim
