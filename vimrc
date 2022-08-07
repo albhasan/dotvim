@@ -109,11 +109,11 @@ if has('autocmd')
         autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
     augroup END
 
-    augroup ctags
-        autocmd!
-       " Run ctags each time a source file is saved.
-       autocmd BufWritePost *.py,*.js,*.R,*.c,*.cpp,*.h call system("ctags -R")
-    augroup END
+    " augroup ctags
+    "     autocmd!
+    "    " Run ctags each time a source file is saved.
+    "    autocmd BufWritePost *.py,*.js,*.R,*.c,*.cpp,*.h call system("ctags -R")
+    " augroup END
 
     augroup filetype_vim
         autocmd!
@@ -160,7 +160,7 @@ call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-unimpaired')
-call minpac#add('vim-airline/vim-airline')
+"call minpac#add('vim-airline/vim-airline')
 call minpac#add('yegappan/taglist')
 call minpac#add('vim/killersheep', {'type': 'opt'})
 call minpac#add('tpope/vim-scriptease', {'type': 'opt'})
@@ -224,7 +224,7 @@ let g:ale_linters = {
             \   'r':          ['styler', 'lintr'],
             \   'sh':         ['shellcheck'],
             \   'tex':        ['chktex', 'proselint', 'write-good'],
-            \   'text':       ['chktex', 'proselint', 'write-good'],
+            \   'text':       ['proselint', 'write-good'],
             \   'vim':        ['vint'],
             \   'xhtml':      ['proselint', 'write-good'],
             \   'xml':        ['xmllint'],
