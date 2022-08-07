@@ -146,7 +146,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + New session `tmux new -s session_name`
 
 + New window `Ctrl + A + c`
-+ Show windows `Ctrl + A + x`
++ Show windows `Ctrl + A + w`
 + Rename window `Ctrl + A + ,`
 + Move to next window `Ctrl + n`
 
