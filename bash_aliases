@@ -39,7 +39,7 @@ alias tgz='tar -xvfz'
 alias ff='find . -type f -iname'
 
 
-#---------------
+#------------------------------------------------------------------------------
 # Linux essentials https://youtu.be/Ok_kD_sgNcs
 
 # Pretty print mounted partitions 
@@ -56,3 +56,19 @@ alias mem5="ps auxf | sort -nr -k 4 | head -5"
 
 # Top t processes using the most cpu.
 alias cpu5="ps auxf | sort -nr -k 3 | head -5"
+
+#------------------------------------------------------------------------------
+# Deprecated linux commands you should not use anymore (and their alternatives)
+# https://itsfoss.com/deprecated-linux-commands/
+alias scp="echo 'STOP. Use instead rsync'"
+alias    egrep="echo 'STOP. Use instead grep -E'"
+alias    fgrep="echo 'STOP. Use instead grep -F'"
+alias  netstat="echo 'STOP. Use instead ss'"
+alias ifconfig="echo 'STOP. Use instead ip'"
+alias      arp="echo 'STOP. Use instead ip n'"
+alias    route="echo 'STOP. Use instead ip tunnel'"
+alias iptunnel="echo 'STOP. Use instead ip link'"
+alias   nameif="echo 'STOP. Use instead ip route'"
+alias iwconfig="echo 'STOP. Use instead iw'"
+alias iptables="echo 'STOP. Use instead nftables'"
+
