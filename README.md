@@ -175,6 +175,12 @@ ln -s ~/Documents/github/dotvim/bash_aliases           ~/.bash_aliases
 
 ## TODO:
 
++ Create my own .tmux.conf to enable using plugin [resurrect]
+(https://www.maketecheasier.com/manage-restore-tmux-sessions-linux/).
++ Clean the REPO. Store only configuration files: vimrc, .tmux.conf, and
+base_aliases.
++ Disentangle vim and tmux in the instructions. 
++ Check if the followings TODOs are still pertinent.
 + Move color schemas to the right place in the directory tree.
 + Prettier lint is not working. ALE has no vim files about its configuration. Either remove it or fix it.
 + styler is not working. Either remove it or fix it.
