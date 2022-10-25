@@ -9,17 +9,17 @@
 
 ```
 sudo apt install vim
-#sudo apt install neovim
+sudo apt install tmux 
+sudo apt install build-essential
+sudo apt install cmake
+sudo apt install git
 sudo apt install ack-grep
 sudo apt install bibclean
 sudo apt install clang
 sudo apt install clang-tidy
-sudo apt install git
-sudo apt-get install exuberant-ctags
-sudo apt install tmux 
+sudo apt install exuberant-ctags
 sudo apt install python3-pip
 sudo apt install npm
-sudo apt install cmake
 ```
 
 
@@ -85,6 +85,12 @@ cd tmux-mem-cpu-load
 cmake .
 make
 sudo make install
+git clone https://github.com/tmux-plugins/tpm ~/Documents/github/dotvim/tmux-config/plugins/tpm
+
+# Install TMUX plugins:
+# tmux new -s alber
+# tmux source ~/.tmux.conf
+# Ctrl + A Ctrl + I
 ```
 
 
@@ -95,12 +101,6 @@ ln -s ~/Documents/github/dotvim                        ~/.vim
 ln -s ~/Documents/github/dotvim/tmux-config            ~/.tmux
 ln -s ~/Documents/github/dotvim/tmux-config/.tmux.conf ~/.tmux.conf
 ln -s ~/Documents/github/dotvim/bash_aliases           ~/.bash_aliases
-
-# neovim
-mkdir -p ~/.config/nvim
-echo "set runtimepath^=~/.vim/ runtimepath+=~/.vim/after" >  ~/.config/nvim/init.vim
-echo "let &packpath = &runtimepath"                       >> ~/.config/nvim/init.vim
-echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init.vim
 ```
 
 
@@ -144,6 +144,8 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Attach session `Ctrl + at -t session_name`
 + Dettach session `Ctrl + d`
 + New session `tmux new -s session_name`
++ Save session (tmux-resurrect) `Ctrl + a Ctrl + s`
++ Restore session (tmux-resurrect) `Ctrl + a Ctrl + r`
 
 + New window `Ctrl + A + c`
 + Show windows `Ctrl + A + w`
@@ -159,6 +161,7 @@ echo "source ~/.vim/vimrc"                                >> ~/.config/nvim/init
 + Change focus to panel right `Ctrl + A + l`
 + Change focus to panel left `Ctrl + A + r`
 + Resize panel (keep Ctrl + A down) `Ctrl + A + arrow`
+
 
 
 
