@@ -194,7 +194,7 @@ let mapleader=','
 :nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " quote the current word
 :nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel " quote the current word
 
-NOTE: Copy to the clipboard.
+"NOTE: Copy to the clipboard.
 :vnoremap <C-c> "+y
 " vmap <F5> :!xclip -f -sel clip<CR> # Copy selection to the OS clipboard
 " map <F6> mz:-1r !xclip -o -sel clip<CR>`z # Paste from the clipboard
