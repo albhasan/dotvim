@@ -18,7 +18,7 @@ scriptencoding utf-8
 " COMMENTS:
 " - Comment current word ,' or ,"
 " - Comment selection using gc after selection
-" - Comment current line using gcc
+" - Comment current line using gc
 "
 " CHANGE QUOTATION MARKS:
 " - From inside quoted text, press cs<old_quote><new_quote> to change quotes.
@@ -111,11 +111,11 @@ if has('autocmd')
         autocmd BufWritePre *.py,*.js,*.R :call <SID>StripTrailingWhitespaces()
     augroup END
 
-    " augroup ctags
-    "     autocmd!
-    "    " Run ctags each time a source file is saved.
-    "    autocmd BufWritePost *.py,*.js,*.R,*.c,*.cpp,*.h call system("ctags -R")
-    " augroup END
+    augroup ctags
+        autocmd!
+       " Run ctags each time a source file is saved.
+       autocmd BufWritePost *.py,*.js,*.R,*.c,*.cpp,*.h call system("ctags -R --exclude=.venv/*")
+    augroup END
 
     augroup filetype_vim
         autocmd!
@@ -434,3 +434,22 @@ endfunction
 " All messages and errors will be ignored.
 "silent! helptags ALL
 
+" https://stackoverflow.com/questions/37644682/why-is-vim-so-slow
+" function! CloseHiddenBuffers()
+"     " >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+"     " close any buffers hidden
+"     " <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+"     let open_buffers = []
+
+"     for i in range(tabpagenr('$'))
+"         call extend(open_buffers, tabpagebuflist(i + 1))
+"     endfor
+
+"     for num in range(1, bufnr("$") + 1)
+"         if buflisted(num) && index(open_buffers, num) == -1
+"             exec "bdelete ".num
+"         endif
+"     endfor
+" endfunction
+
+" au BufEnter * call CloseHiddenBuffers()
