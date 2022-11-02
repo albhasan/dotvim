@@ -9,6 +9,7 @@
 
 ```
 sudo apt install vim
+sudo apt install vim-gtk 
 sudo apt install tmux 
 sudo apt install build-essential
 sudo apt install cmake
