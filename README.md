@@ -18,7 +18,8 @@ sudo apt install ack-grep
 sudo apt install bibclean
 sudo apt install clang
 sudo apt install clang-tidy
-sudo apt install exuberant-ctags
+#sudo apt install exuberant-ctags
+sudo apt install universal-ctags
 sudo apt install python3-pip
 sudo apt install npm
 ```
@@ -87,6 +88,13 @@ cmake .
 make
 sudo make install
 git clone https://github.com/tmux-plugins/tpm ~/Documents/github/dotvim/tmux-config/plugins/tpm
+
+# Add the following lines to the end of .tmux.conf:
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-yank'
+run -b '~/.tmux/plugins/tpm/tpm'
 
 # Install TMUX plugins:
 # tmux new -s alber
@@ -163,6 +171,9 @@ ln -s ~/Documents/github/dotvim/bash_aliases           ~/.bash_aliases
 + Change focus to panel left `Ctrl + A + r`
 + Resize panel (keep Ctrl + A down) `Ctrl + A + arrow`
 
++ Select text: `Ctrl + A + v`
++ Copy text to the OS's clipboard:  Select text and yank it `y`. Use 
+  `Ctrl + Shift + v` to paste it to the console emulator.
 
 
 
