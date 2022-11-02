@@ -3,6 +3,7 @@ scriptencoding utf-8
 
 "---- NOTES ---- {{{
 "
+" GENERAL:
 " - update the plugins calling :call minpac#update()
 " - Call :set list to show invisible characters.
 " - Use F4 to toggle search highlight.
@@ -18,7 +19,6 @@ scriptencoding utf-8
 " - Comment current word ,' or ,"
 " - Comment selection using gc after selection
 " - Comment current line using gcc
-"
 "
 " CHANGE QUOTATION MARKS:
 " - From inside quoted text, press cs<old_quote><new_quote> to change quotes.
@@ -50,7 +50,8 @@ scriptencoding utf-8
 " - Close current split              :q
 "
 " PASTE
-" - Use "{0-9}p to paster former cutted texts.
+" - Copy to the clipboard            Crtl+c
+" - Use "{0-9} to paster former cutted texts.
 "
 " TODO: check
 " - use Q to search-next and replace
@@ -65,6 +66,7 @@ set colorcolumn=80
 set history=200
 set incsearch
 set listchars=tab:▸\ ,eol:¬
+"set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 set nrformats=
 set ruler
 set spelllang=en_us
@@ -191,6 +193,13 @@ let mapleader=','
 :nnoremap <leader>sv     :source $MYVIMRC<cr>  " source vimrc
 :nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " quote the current word
 :nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel " quote the current word
+
+NOTE: Copy to the clipboard.
+:vnoremap <C-c> "+y
+" vmap <F5> :!xclip -f -sel clip<CR> # Copy selection to the OS clipboard
+" map <F6> mz:-1r !xclip -o -sel clip<CR>`z # Paste from the clipboard
+
+
 "
 " Bubble single lines
 " http://vimcasts.org/episodes/bubbling-text/
