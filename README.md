@@ -125,8 +125,7 @@ ln -s ~/Documents/github/dotvim/bash_aliases           ~/.bash_aliases
 
 ## Usage notes vim:
 
-+ Change background using `:set background=dark`
-+ Cange colors using `:colorscheme solarized8`
++ Cange colors using `:colorscheme desert`
 + Show invisible characters `:set list`
 + Set the tab configuration `:Stab`
 + Toggle search highlight using F4
@@ -137,6 +136,7 @@ ln -s ~/Documents/github/dotvim/bash_aliases           ~/.bash_aliases
 + Use `Ctrl + ]` to jump to function definitions and `Ctrl + t` to get back.
 + Use `gc` to comment lines of code.
 + Use `Ctrl + r 0` to paste yanked text.
++ Use `Ctrl + c` to copy from vim to the OS's clipboard.
 
 
 ## Usage notes tmux:
