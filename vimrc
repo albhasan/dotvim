@@ -194,6 +194,11 @@ let mapleader=','
 :nnoremap <leader>" viw<esc>a"<esc>bi"<esc>lel " quote the current word
 :nnoremap <leader>' viw<esc>a'<esc>bi'<esc>lel " quote the current word
 
+:nnoremap <C-d>    <C-d>zz                 " move half screen down & center
+:nnoremap <C-u>    <C-u>z                  " move half screen up & center
+":nnoremap n        nzz                     " move to next find & center
+":nnoremap N        Nzz                     " move to last find item & center
+
 "NOTE: Copy to the clipboard.
 :vnoremap <C-c> "+y
 " vmap <F5> :!xclip -f -sel clip<CR> # Copy selection to the OS clipboard
